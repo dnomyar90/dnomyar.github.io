@@ -1,120 +1,250 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-19T15:59:54+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Selenium Overview &amp;amp; Setup</title><link href="http://localhost:4000/selenium/selenium-overview-setup/" rel="alternate" type="text/html" title="Selenium Overview &amp; Setup" /><published>2016-06-25T00:00:00+07:00</published><updated>2016-06-25T00:00:00+07:00</updated><id>http://localhost:4000/selenium/selenium-overview-setup</id><content type="html" xml:base="http://localhost:4000/selenium/selenium-overview-setup/">&lt;h2 id=&quot;quick-selenium-overview&quot;&gt;Quick Selenium Overview&lt;/h2&gt;
-&lt;p&gt;In this article we’ll explore what Selenium is and how to prep our environment to use it.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-19T20:29:43+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Powerful GraphQL Automated Test With Karate</title><link href="http://localhost:4000/karate/automated%20test/karate-graphql/" rel="alternate" type="text/html" title="Powerful GraphQL Automated Test With Karate" /><published>2020-06-19T00:00:00+07:00</published><updated>2020-06-19T00:00:00+07:00</updated><id>http://localhost:4000/karate/automated%20test/karate-graphql</id><content type="html" xml:base="http://localhost:4000/karate/automated%20test/karate-graphql/">&lt;h2 id=&quot;what-is-graphql&quot;&gt;What is GraphQL&lt;/h2&gt;
+&lt;p&gt;Most of us probably already know about REST, as REST seems to be the go-to standard for APIs. Some of us may be thinking, what GraphQL is? How is it different from REST? Well I was thinking the same when I first interviewed at &lt;a href=&quot;https://kumparan.com/&quot;&gt;kumparan&lt;/a&gt;.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Selenium is an umbrella project for a range of tools and libraries that enable and support the automation of web browsers. - From &lt;a href=&quot;https://seleniumhq.github.io/docs/index.html&quot; target=&quot;_blank&quot;&gt;Selenium HQ&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;I had no idea whatsoever of what GraphQL is about, let alone how to test it. But after dealing with (testing) GraphQLs for 1 year, I cannot look at traditional REST API the same way again. GraphQL really solves the over-fetching problem of REST.&lt;/p&gt;
 
-&lt;p&gt;Selenium enables us to:&lt;/p&gt;
+&lt;p&gt;The biggest problem with traditional REST is over-fetching. Using REST, we have to call multiple endpoints to get informations we need. I would refer to this great example from &lt;a href=&quot;https://www.howtographql.com/basics/1-graphql-is-the-better-rest/&quot;&gt;HowToGraphql&lt;/a&gt;:&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Open browsers&lt;/li&gt;
-  &lt;li&gt;Navigate web pages&lt;/li&gt;
-  &lt;li&gt;Find web elements&lt;/li&gt;
-  &lt;li&gt;Manipulate web elements&lt;/li&gt;
-  &lt;li&gt;Run JavaScript&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/karate-graphql/rest.png&quot; alt=&quot;REST&quot; title=&quot;REST&quot; height=&quot;75%&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;language-bindings&quot;&gt;Language Bindings&lt;/h3&gt;
-&lt;p&gt;First we’ll need to get the language bindings we want. The bindings will need to be downloaded and referenced in our project. Some IDE’s have package managers that will do this for us. We’ll talk more about how that’s done in separate articles. For now just know that we’ll need some language bindings to get Selenium to work.&lt;/p&gt;
-
-&lt;h3 id=&quot;webdrivers&quot;&gt;Webdrivers&lt;/h3&gt;
-&lt;p&gt;Selenium’s power comes from &lt;a href=&quot;http://docs.seleniumhq.org/docs/03_webdriver.jsp&quot; target=&quot;_blank&quot;&gt;webdrivers&lt;/a&gt;; called such because they “drive the web.” In the articles to come we’ll be using Chrome, Firefox, Edge and IE; we’ll need drivers for each.&lt;/p&gt;
-
-&lt;h4 id=&quot;chrome&quot;&gt;Chrome&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;https://sites.google.com/a/chromium.org/chromedriver/&quot; target=&quot;_blank&quot;&gt;ChromeDriver&lt;/a&gt; is a separate executable loaded by Selenium when Chrome is the desired browser. Download the latest driver and place it in an easily-accessible location. I keep mine in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:/webdrivers/&lt;/code&gt;. Download and install the latest &lt;a href=&quot;https://www.google.com/intl/en/chrome/browser/desktop/index.html&quot; target=&quot;_blank&quot;&gt;Chrome&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;firefox&quot;&gt;Firefox&lt;/h4&gt;
-&lt;p&gt;The &lt;a href=&quot;https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver&quot; target=&quot;_blank&quot;&gt;FirefoxDriver&lt;/a&gt; comes built-in with the Selenium language bindings. Download and install the latest &lt;a href=&quot;https://www.mozilla.org/en-US/firefox/all/&quot; target=&quot;_blank&quot;&gt;Firefox&lt;/a&gt;.
-Mozilla is working on a new driver for their browser called &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette&quot; target=&quot;_blank&quot;&gt;MarionetteDriver&lt;/a&gt;. However, it has not been released as of this writing. Feel free to download the latest driver and put it in the same location as the ChromeDriver.&lt;/p&gt;
-
-&lt;h4 id=&quot;edge&quot;&gt;Edge&lt;/h4&gt;
-&lt;p&gt;The &lt;a href=&quot;https://www.microsoft.com/en-us/download/details.aspx?id=48212&quot; target=&quot;_blank&quot;&gt;Microsoft WebDriver&lt;/a&gt; is a separate executable loaded up by Selenium when Edge is requested as a browser. Download the latest driver and keep it in the same location as the other driver(s). Make sure you have the latest updates for Edge.&lt;/p&gt;
-
-&lt;h4 id=&quot;ie&quot;&gt;IE&lt;/h4&gt;
-&lt;p&gt;The &lt;a href=&quot;http://docs.seleniumhq.org/download/&quot; target=&quot;_blank&quot;&gt;IEDriverServer&lt;/a&gt; is maintained and distributed by the Selenium group. Download the latest driver and put it in the same location as the other driver(s). Make sure you have the latest updates for IE.&lt;/p&gt;
-
-&lt;h3 id=&quot;adding-to-path&quot;&gt;Adding to PATH&lt;/h3&gt;
-&lt;p&gt;Now that we have all the drivers we’ll want to use we need to add an entry to our PATH environment variable. If you’ve never done anything with environment variables I would recommend reading this &lt;a href=&quot;http://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/&quot; target=&quot;_blank&quot;&gt;guide&lt;/a&gt;. Follow the instructions and add the folder containing your webdrivers.&lt;/p&gt;
-
-&lt;p&gt;Now Selenium will be ready to go! Check out one of my other articles for the environment you want to use with Selenium:&lt;/p&gt;
-
+&lt;p&gt;Let’s assume we need to fetch:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/selenium/dotnet-selenium-mstest-quickstart&quot; target=&quot;_blank&quot;&gt;C#, Selenium &amp;amp; MSTest&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/selenium/js-selenium-mocha-quickstart&quot; target=&quot;_blank&quot;&gt;JavaScript, Selenium &amp;amp; Mocha&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;An user’s name&lt;/li&gt;
+  &lt;li&gt;The user’s last post’s content&lt;/li&gt;
+  &lt;li&gt;The user’s last 3 followers’ name&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Thanks for reading! Be sure to share this post if you found it helpful and don’t hesitate to chat with me about it!&lt;/p&gt;</content><author><name>Raymond</name></author><category term="selenium" /><summary type="html">A quick overview of Selenium and guide on getting it ready for glory!</summary></entry><entry><title type="html">C# Selenium MSTest QuickStart Guide</title><link href="http://localhost:4000/selenium/dotnet-selenium-mstest-quickstart/" rel="alternate" type="text/html" title="C# Selenium MSTest QuickStart Guide" /><published>2016-06-18T00:00:00+07:00</published><updated>2016-06-18T00:00:00+07:00</updated><id>http://localhost:4000/selenium/dotnet-selenium-mstest-quickstart</id><content type="html" xml:base="http://localhost:4000/selenium/dotnet-selenium-mstest-quickstart/">&lt;h2 id=&quot;getting-started-with-c-selenium-and-mstest&quot;&gt;Getting started with C#, Selenium and MSTest!&lt;/h2&gt;
-&lt;p&gt;In this article we’ll be using MSTest and Selenium to write tests for web applications. This will be a starter project we can build on for various projects and in future articles.&lt;/p&gt;
+&lt;p&gt;Using REST, we need to make 3 requests to get all the information we need. Those 3 requests also return some information that we not need. Things can get messy real quick especially if some of the endpoints are returning huge amount of information in a request. This is the classic problem of over-fetching in REST.&lt;/p&gt;
 
-&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
-&lt;p&gt;Here are the requirements before we get started:&lt;/p&gt;
+&lt;p&gt;Using GraphQL, we can specify all information we need to get in a single request. This is because GraphQL is using a declarative approach to fetch data. What in the world is declarative approach? Good question. Again, I will provide the great example from &lt;a href=&quot;https://www.howtographql.com/basics/1-graphql-is-the-better-rest/&quot;&gt;HowToGraphql&lt;/a&gt;:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx&quot; target=&quot;_blank&quot;&gt;Visual Studio&lt;/a&gt; (A Microsoft Integrated Development Environment or IDE)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://docs.nuget.org/consume/installing-nuget&quot; target=&quot;_blank&quot;&gt;Nuget&lt;/a&gt; (A package manager for Visual Studio)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://docs.seleniumhq.org/download/&quot; target=&quot;_blank&quot;&gt;Selenium C# language bindings&lt;/a&gt; (But we’ll use NuGet to grab these)&lt;/li&gt;
-  &lt;li&gt;Any browsers installed that you want to test &lt;a href=&quot;http://docs.seleniumhq.org/about/platforms.jsp&quot; target=&quot;_blank&quot;&gt;Supported Platforms&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/karate-graphql/graphql.png&quot; alt=&quot;GraphQL&quot; title=&quot;GraphQL&quot; height=&quot;75%&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;selenium-prep&quot;&gt;Selenium Prep&lt;/h3&gt;
-&lt;p&gt;If you haven’t read through my quick &lt;a href=&quot;/selenium/selenium-overview-setup/&quot;&gt;Overview of Selenium&lt;/a&gt; you should do that now. Selenium will need a few things configured before it’ll do its magic!&lt;/p&gt;
+&lt;p&gt;As you can see, we only need to send a single query to GraphQL server in order to get information we need. We do not burden our server with multiple requests. The GraphQL server also efficiently do not fetch informations we do not request for.&lt;/p&gt;
 
-&lt;h3 id=&quot;create-project&quot;&gt;Create Project&lt;/h3&gt;
-&lt;p&gt;To kick things off we’ll need a new project.&lt;/p&gt;
+&lt;p&gt;Yeay, now you know what GraphQL is and how does it compare to REST. Do not worry. Even if you have not, you can find a sample GraphQL application that you can toy with on my &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql&quot;&gt;repository&lt;/a&gt;. The sample application is about football players, teams, and leagues.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;File &amp;gt; New &amp;gt; Project&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In brief, the application contains relational data between players with their respective teams and leagues. You can fetch data of players, leagues, and teams. You can also try to insert players information. The application utilizes PostgreSQL alongside GraphQL server. No need to worry as installation should be really easy to do. I also provided a data migration, so you don’t have to setup tables manually on the database 😉&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/dotnet-selenium-mstest/new-project.png&quot; alt=&quot;Create a new project&quot; title=&quot;Create a new project&quot; /&gt;
-Select the Unit Test Project template (&lt;strong&gt;Templates &amp;gt; Visual C# &amp;gt; Test&lt;/strong&gt;), give it a name and configure some options. Press Ok to create the project. Visual Studio will create the project and open up your first UnitTest class.
-&lt;img src=&quot;http://localhost:4000/assets/images/dotnet-selenium-mstest/new-project-first-view.png&quot; alt=&quot;New project's first view&quot; title=&quot;New project's first view&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Below is what the application looks like:&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;importinstall-selenium&quot;&gt;Import/Install Selenium&lt;/h3&gt;
-&lt;p&gt;Now we’ll need to grab the Selenium DLLs and give our project access to them.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Tools &amp;gt; NuGet Package Manager &amp;gt; Manage NuGet Packages for Solution&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/dotnet-selenium-mstest/open-nuget.png&quot; alt=&quot;Open NuGet&quot; title=&quot;Open NuGet&quot; /&gt;
-Select Browse, search for ‘Selenium’ and install both Selenium.WebDriver and Selenium.Support for your new project.&lt;/p&gt;
-
-&lt;h3 id=&quot;write-test&quot;&gt;Write Test&lt;/h3&gt;
-&lt;p&gt;Now the fun begins; we can write the first Selenium test!
-We’ll write our test against &lt;a href=&quot;http://the-internet.herokuapp.com/&quot; target=&quot;_blank&quot;&gt;The Internet&lt;/a&gt;&lt;sup id=&quot;fnref:theinternet&quot;&gt;&lt;a href=&quot;#fn:theinternet&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here’s some code to put inside the &lt;strong&gt;TestMethod1()&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//var driver = new OpenQA.Selenium.Firefox.FirefoxDriver&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//var driver = new OpenQA.Selenium.Edge.EdgeDriver&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//var driver = new OpenQA.Selenium.IE.InternetExplorerDriver&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpenQA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Selenium&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Chrome&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ChromeDriver&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Url&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://the-internet.herokuapp.com/&quot;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;IsTrue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Title&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;The Internet&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Dispose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;query{
+  players{
+    id
+    first_name
+    last_name
+    team{
+      id
+      name
+      is_league_winner
+      current_competitions
+      league{
+        id
+        name
+        continent
+      }
+    }
+  }
+}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Get a web driver&lt;/li&gt;
-  &lt;li&gt;Set the URL property (tells the driver to go to that URL)&lt;/li&gt;
-  &lt;li&gt;Assert on the title of the driver&lt;/li&gt;
-  &lt;li&gt;Dispose of the driver&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;By having the query above, you can get information of players and their detailed information of teams &amp;amp; leagues:&lt;/p&gt;
 
-&lt;h3 id=&quot;run-test&quot;&gt;Run Test&lt;/h3&gt;
-&lt;p&gt;Now that we have a functional test we can run it. First, if the Test Explorer isn’t displayed we need to add it.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+  &quot;data&quot;: {
+    &quot;players&quot;: [
+      {
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;first_name&quot;: &quot;Messi&quot;,
+        &quot;last_name&quot;: &quot;Lionel&quot;,
+        &quot;team&quot;: {
+          &quot;id&quot;: 1,
+          &quot;name&quot;: &quot;Barcelona&quot;,
+          &quot;is_league_winner&quot;: true,
+          &quot;current_competitions&quot;: [
+            &quot;Copa Del Rey&quot;,
+            &quot;La Liga&quot;
+          ],
+          &quot;league&quot;: {
+            &quot;id&quot;: 6,
+            &quot;name&quot;: &quot;La Liga&quot;,
+            &quot;continent&quot;: &quot;Europe&quot;
+          }
+        }
+      },
+      {
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;first_name&quot;: &quot;Henry&quot;,
+        &quot;last_name&quot;: &quot;Thierry&quot;,
+        &quot;team&quot;: {
+          &quot;id&quot;: 2,
+          &quot;name&quot;: &quot;Arsenal&quot;,
+          &quot;is_league_winner&quot;: true,
+          &quot;current_competitions&quot;: [
+            &quot;English Premier League&quot;,
+            &quot;Carling Cup&quot;
+          ],
+          &quot;league&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;English Premier League&quot;,
+            &quot;continent&quot;: &quot;Europe&quot;
+          }
+        }
+      }
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Test &amp;gt; Windows &amp;gt; Test Explorer&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Okay, we have learned how to fetch information using GraphQL. But how do we test GraphQL operations? Great question.&lt;/p&gt;
 
-&lt;p&gt;Our test isn’t showing up yet. We need to build the solution for it to recognize that we’ve written a test it can run. Right click on the solution in the Solution Explorer and Build or Rebuild the solution. If the build is successful we should see our test show up in the Test Explorer. Now we can right click on our test and tell it to run. If all went according to plan we should see a Chrome window pop up, navigate to Google’s home page and then close.&lt;/p&gt;
+&lt;p&gt;GraphQL is quite different from REST in terms of request’s data type. Most of requests and responses on REST is based on JSON or XML. GraphQL on the other hand employs a query that may look like JSON. But it is actually not JSON.&lt;/p&gt;
 
-&lt;p&gt;This is a basic, and brittle, example of how Selenium works. If our assertion returns false the test will report a failure but the browser window will still be alive. This test is brittle in that it can’t run any code after the Assert if the Assert returns false. We’ll cover a much better testing approach in a later post to avoid such things! This is not an example of best practices by any means. This is to get you a working example of Selenium. Stay tuned for more posts on how to use Selenium and best practices for automating tests!&lt;/p&gt;
+&lt;p&gt;After doing some research, we decided to go with &lt;a href=&quot;https://intuit.github.io/karate/&quot;&gt;Karate&lt;/a&gt;. Karate provides the ability to deal with GraphQL out of the box. At the same time, it provides what I believe to be one of (&lt;em&gt;if not&lt;/em&gt;) the most powerful assertions in the whole API testing world.&lt;/p&gt;
 
-&lt;p&gt;Thanks for reading! I hope you found it helpful!&lt;/p&gt;
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:theinternet&quot;&gt;
-      &lt;p&gt;Credit to &lt;a href=&quot;http://davehaeffner.com/&quot; target=&quot;_blank&quot;&gt;Dave Haeffner&lt;/a&gt;. &lt;a href=&quot;#fnref:theinternet&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>Raymond</name></author><category term="Selenium" /><category term="MSTest" /><category term="dotnet" /><category term="windows" /><summary type="html">A quick how-to on setting up a solution using MSTest and Selenium!</summary></entry></feed>
+&lt;h2 id=&quot;karate-test-framework&quot;&gt;Karate Test Framework&lt;/h2&gt;
+&lt;p&gt;Karate provides an out of the box support for GraphQL queries and mutations. Karate also supports REST, and even UI Automated Testing including desktop applications. Another very enticing feature is that we can reuse existing Karate API test scenarios as performance test. Yes, you hear it right. I will cover it in another article in the future.&lt;/p&gt;
+
+&lt;p&gt;But if you ask me what is my most favourite feature of karate, it would be it’s insanely simple yet powerful assertion. GraphQL may be efficient and all that, but it can also gives you headache testing it. It is very likely you will encounter nested response on GraphQL applications. Based on my past experience on using &lt;a href=&quot;http://rest-assured.io/&quot;&gt;REST-Assured&lt;/a&gt;, I already expected that I will have to deal with gruesome task asserting nested data.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Except that with Karate, I don’t&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I am going to give you a peek of how easy you can do request and assertion on Karate. All of the examples are available on the &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa&quot;&gt;repository&lt;/a&gt;. Alright, let’s get into it!&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Scenario: Find All Players
+
+    # Define GraphQL query
+    # In karate you can use multiline declaration
+
+    Given text query =
+    &quot;&quot;&quot;
+    {
+      players{
+        id
+        first_name
+        last_name
+        team{
+            id
+            name
+            is_league_winner
+            current_competitions
+            league{
+                id
+                name
+                continent
+            }
+        }
+    }
+  }
+    &quot;&quot;&quot;
+
+        # Request the query
+        And request { query: '#(query)'}
+
+        # Use method POST (GraphQL always uses POST)
+        When method POST
+
+        # Assert status code is OK
+        Then status 200
+
+        # Print response
+        And print response
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you might have noticed, Karate employs a cucumber-like syntax. It is however not cucumber, as we do not need to write a &lt;em&gt;glue&lt;/em&gt; code to translate the sentences. The example above shows you how we can even use multi-line variable on Karate. Below are the data that will be returned:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+  &quot;data&quot;: {
+    &quot;players&quot;: [
+      {
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;first_name&quot;: &quot;Messi&quot;,
+        &quot;last_name&quot;: &quot;Lionel&quot;,
+        &quot;team&quot;: {
+          &quot;id&quot;: 1,
+          &quot;name&quot;: &quot;Barcelona&quot;,
+          &quot;is_league_winner&quot;: true,
+          &quot;current_competitions&quot;: [
+            &quot;Copa Del Rey&quot;,
+            &quot;La Liga&quot;
+          ],
+          &quot;league&quot;: {
+            &quot;id&quot;: 6,
+            &quot;name&quot;: &quot;La Liga&quot;,
+            &quot;continent&quot;: &quot;Europe&quot;
+          }
+        }
+      },
+      {
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;first_name&quot;: &quot;Henry&quot;,
+        &quot;last_name&quot;: &quot;Thierry&quot;,
+        &quot;team&quot;: {
+          &quot;id&quot;: 2,
+          &quot;name&quot;: &quot;Arsenal&quot;,
+          &quot;is_league_winner&quot;: true,
+          &quot;current_competitions&quot;: [
+            &quot;English Premier League&quot;,
+            &quot;Carling Cup&quot;
+          ],
+          &quot;league&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;English Premier League&quot;,
+            &quot;continent&quot;: &quot;Europe&quot;
+          }
+        }
+      }
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Okay, now we head to the interesting part: &lt;strong&gt;assertion&lt;/strong&gt;. Below you can find some of assertions that you can do on Karate. Some nested assertions included.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;*Spoiler: You can do nested assertion just by one line of code on Karate&lt;/em&gt; 😄&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Asserting response time is less than 100ms:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Then assert responseTime &amp;lt; 100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Asserting each record of player’s team is_league_winner is boolean:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Then match each response.data.players[*].team.is_league_winner == '#boolean'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Asserting data of players is returned (empty array is okay):
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Then match response.data.players != '#null'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Asserting each player has a team competing in competitions:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Then match each response.data.players[*].team.current_competitions[*] != '#null'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Asserting that there is a team competing in “La Liga” competition:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Then match response.data.players[*].team.current_competitions[*] contains &quot;La Liga&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Asserting that there is a team competing in “La Liga” and “Copa Del Rey” competition:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;And def competitions = [&quot;Copa Del Rey&quot;, &quot;La Liga&quot;]
+Then match response.data.players[*].team.current_competitions[*] contains competitions
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Asserting that there is no team competing in “La Liga” and “Bundesliga” competition:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# This is one of karate's own style wildcards
+# It might look unfamiliar. But you will get used to it in no time
+And def competitions = [&quot;La Liga&quot;, &quot;Bundesliga&quot;]
+Then match response.data.players[*].team.current_competitions[*] !contains '#(^competitions)'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Assert no error response is returned:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Then match response.errors == '#notpresent'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I can go on and on, but there are simply a lot of combinations to do. I suggest you try it by yourself using examples provided on my &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql&quot;&gt;repository&lt;/a&gt;. You will be amazed on how simple yet powerful some of the assertions are in &lt;a href=&quot;https://intuit.github.io/karate/&quot;&gt;Karate&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading! I hope you found it useful!&lt;/p&gt;</content><author><name>Raymond</name></author><category term="karate" /><category term="automated test" /><summary type="html">Demo of karate test framework for GraphQL application. Sample GraphQL application is provided.</summary></entry></feed>

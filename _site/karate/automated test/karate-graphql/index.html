@@ -1,0 +1,763 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Powerful GraphQL Automated Test With Karate - Dnomyar Space</title>
+<meta name="description" content="Demo of karate test framework for GraphQL application. Sample GraphQL application is provided.">
+
+
+  <meta name="author" content="Raymond">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Dnomyar Space">
+<meta property="og:title" content="Powerful GraphQL Automated Test With Karate">
+<meta property="og:url" content="http://localhost:4000/karate/automated%20test/karate-graphql/">
+
+
+  <meta property="og:description" content="Demo of karate test framework for GraphQL application. Sample GraphQL application is provided.">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/karate-graphql/header.jpg">
+
+
+
+  <meta name="twitter:site" content="@wongpuyuh">
+  <meta name="twitter:title" content="Powerful GraphQL Automated Test With Karate">
+  <meta name="twitter:description" content="Demo of karate test framework for GraphQL application. Sample GraphQL application is provided.">
+  <meta name="twitter:url" content="http://localhost:4000/karate/automated%20test/karate-graphql/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/karate-graphql/header.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-06-19T00:00:00+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/karate/automated%20test/karate-graphql/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Raymond",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Dnomyar Space Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Dnomyar Space
+          <span class="site-subtitle">Welcome to my space and time</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Articles</a>
+            </li><li class="masthead__menu-item">
+              <a href="/work/">About Me</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/assets/images/karate-graphql/header.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Powerful GraphQL Automated Test With Karate
+
+        
+      </h1>
+      
+        <p class="page__lead">Demo of karate test framework for GraphQL application. Sample GraphQL application is provided.
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Photo by <a href="https://unsplash.com/@jsnbrsc">Jason Briscoe</a> on <a href="https://unsplash.com">Unsplash</a>
+</span>
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio.jpg" alt="Raymond" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Raymond</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>I walk into a bar. I order a beer. Order 0 beers. Order 999999 beers. Order a lizard. Order -1 beers. Order a ueicbksjdhd. Of course I order a DROP TABLE beers too.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Jakarta</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://github.com/dnomyar90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://linkedin.com/in/raymondsumargo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/wongpuyuh" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Powerful GraphQL Automated Test With Karate">
+    <meta itemprop="description" content="Demo of karate test framework for GraphQL application. Sample GraphQL application is provided.">
+    <meta itemprop="datePublished" content="2020-06-19T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="what-is-graphql">What is GraphQL</h2>
+<p>Most of us probably already know about REST, as REST seems to be the go-to standard for APIs. Some of us may be thinking, what GraphQL is? How is it different from REST? Well I was thinking the same when I first interviewed at <a href="https://kumparan.com/">kumparan</a>.</p>
+
+<p>I had no idea whatsoever of what GraphQL is about, let alone how to test it. But after dealing with (testing) GraphQLs for 1 year, I cannot look at traditional REST API the same way again. GraphQL really solves the over-fetching problem of REST.</p>
+
+<p>The biggest problem with traditional REST is over-fetching. Using REST, we have to call multiple endpoints to get informations we need. I would refer to this great example from <a href="https://www.howtographql.com/basics/1-graphql-is-the-better-rest/">HowToGraphql</a>:</p>
+
+<p><img src="http://localhost:4000/assets/images/karate-graphql/rest.png" alt="REST" title="REST" height="75%" width="75%" /></p>
+
+<p>Let’s assume we need to fetch:</p>
+<ul>
+  <li>An user’s name</li>
+  <li>The user’s last post’s content</li>
+  <li>The user’s last 3 followers’ name</li>
+</ul>
+
+<p>Using REST, we need to make 3 requests to get all the information we need. Those 3 requests also return some information that we not need. Things can get messy real quick especially if some of the endpoints are returning huge amount of information in a request. This is the classic problem of over-fetching in REST.</p>
+
+<p>Using GraphQL, we can specify all information we need to get in a single request. This is because GraphQL is using a declarative approach to fetch data. What in the world is declarative approach? Good question. Again, I will provide the great example from <a href="https://www.howtographql.com/basics/1-graphql-is-the-better-rest/">HowToGraphql</a>:</p>
+
+<p><img src="http://localhost:4000/assets/images/karate-graphql/graphql.png" alt="GraphQL" title="GraphQL" height="75%" width="75%" /></p>
+
+<p>As you can see, we only need to send a single query to GraphQL server in order to get information we need. We do not burden our server with multiple requests. The GraphQL server also efficiently do not fetch informations we do not request for.</p>
+
+<p>Yeay, now you know what GraphQL is and how does it compare to REST. Do not worry. Even if you have not, you can find a sample GraphQL application that you can toy with on my <a href="https://github.com/dnomyar90/football-karate-demo-graphql">repository</a>. The sample application is about football players, teams, and leagues.</p>
+
+<p>In brief, the application contains relational data between players with their respective teams and leagues. You can fetch data of players, leagues, and teams. You can also try to insert players information. The application utilizes PostgreSQL alongside GraphQL server. No need to worry as installation should be really easy to do. I also provided a data migration, so you don’t have to setup tables manually on the database 😉</p>
+
+<p><em>Below is what the application looks like:</em></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>query{
+  players{
+    id
+    first_name
+    last_name
+    team{
+      id
+      name
+      is_league_winner
+      current_competitions
+      league{
+        id
+        name
+        continent
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<p>By having the query above, you can get information of players and their detailed information of teams &amp; leagues:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "data": {
+    "players": [
+      {
+        "id": "1",
+        "first_name": "Messi",
+        "last_name": "Lionel",
+        "team": {
+          "id": 1,
+          "name": "Barcelona",
+          "is_league_winner": true,
+          "current_competitions": [
+            "Copa Del Rey",
+            "La Liga"
+          ],
+          "league": {
+            "id": 6,
+            "name": "La Liga",
+            "continent": "Europe"
+          }
+        }
+      },
+      {
+        "id": "2",
+        "first_name": "Henry",
+        "last_name": "Thierry",
+        "team": {
+          "id": 2,
+          "name": "Arsenal",
+          "is_league_winner": true,
+          "current_competitions": [
+            "English Premier League",
+            "Carling Cup"
+          ],
+          "league": {
+            "id": 1,
+            "name": "English Premier League",
+            "continent": "Europe"
+          }
+        }
+      }
+    ]
+  }
+}
+</code></pre></div></div>
+
+<p>Okay, we have learned how to fetch information using GraphQL. But how do we test GraphQL operations? Great question.</p>
+
+<p>GraphQL is quite different from REST in terms of request’s data type. Most of requests and responses on REST is based on JSON or XML. GraphQL on the other hand employs a query that may look like JSON. But it is actually not JSON.</p>
+
+<p>After doing some research, we decided to go with <a href="https://intuit.github.io/karate/">Karate</a>. Karate provides the ability to deal with GraphQL out of the box. At the same time, it provides what I believe to be one of (<em>if not</em>) the most powerful assertions in the whole API testing world.</p>
+
+<h2 id="karate-test-framework">Karate Test Framework</h2>
+<p>Karate provides an out of the box support for GraphQL queries and mutations. Karate also supports REST, and even UI Automated Testing including desktop applications. Another very enticing feature is that we can reuse existing Karate API test scenarios as performance test. Yes, you hear it right. I will cover it in another article in the future.</p>
+
+<p>But if you ask me what is my most favourite feature of karate, it would be it’s insanely simple yet powerful assertion. GraphQL may be efficient and all that, but it can also gives you headache testing it. It is very likely you will encounter nested response on GraphQL applications. Based on my past experience on using <a href="http://rest-assured.io/">REST-Assured</a>, I already expected that I will have to deal with gruesome task asserting nested data.</p>
+
+<p><strong><em>Except that with Karate, I don’t</em></strong></p>
+
+<p>I am going to give you a peek of how easy you can do request and assertion on Karate. All of the examples are available on the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa">repository</a>. Alright, let’s get into it!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Scenario: Find All Players
+
+    # Define GraphQL query
+    # In karate you can use multiline declaration
+
+    Given text query =
+    """
+    {
+      players{
+        id
+        first_name
+        last_name
+        team{
+            id
+            name
+            is_league_winner
+            current_competitions
+            league{
+                id
+                name
+                continent
+            }
+        }
+    }
+  }
+    """
+
+        # Request the query
+        And request { query: '#(query)'}
+
+        # Use method POST (GraphQL always uses POST)
+        When method POST
+
+        # Assert status code is OK
+        Then status 200
+
+        # Print response
+        And print response
+</code></pre></div></div>
+
+<p>As you might have noticed, Karate employs a cucumber-like syntax. It is however not cucumber, as we do not need to write a <em>glue</em> code to translate the sentences. The example above shows you how we can even use multi-line variable on Karate. Below are the data that will be returned:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "data": {
+    "players": [
+      {
+        "id": "1",
+        "first_name": "Messi",
+        "last_name": "Lionel",
+        "team": {
+          "id": 1,
+          "name": "Barcelona",
+          "is_league_winner": true,
+          "current_competitions": [
+            "Copa Del Rey",
+            "La Liga"
+          ],
+          "league": {
+            "id": 6,
+            "name": "La Liga",
+            "continent": "Europe"
+          }
+        }
+      },
+      {
+        "id": "2",
+        "first_name": "Henry",
+        "last_name": "Thierry",
+        "team": {
+          "id": 2,
+          "name": "Arsenal",
+          "is_league_winner": true,
+          "current_competitions": [
+            "English Premier League",
+            "Carling Cup"
+          ],
+          "league": {
+            "id": 1,
+            "name": "English Premier League",
+            "continent": "Europe"
+          }
+        }
+      }
+    ]
+  }
+}
+</code></pre></div></div>
+
+<p>Okay, now we head to the interesting part: <strong>assertion</strong>. Below you can find some of assertions that you can do on Karate. Some nested assertions included.</p>
+
+<p><em>*Spoiler: You can do nested assertion just by one line of code on Karate</em> 😄</p>
+
+<ul>
+  <li>Asserting response time is less than 100ms:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Then assert responseTime &lt; 100
+</code></pre></div>    </div>
+  </li>
+  <li>Asserting each record of player’s team is_league_winner is boolean:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Then match each response.data.players[*].team.is_league_winner == '#boolean'
+</code></pre></div>    </div>
+  </li>
+  <li>Asserting data of players is returned (empty array is okay):
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Then match response.data.players != '#null'
+</code></pre></div>    </div>
+  </li>
+  <li>Asserting each player has a team competing in competitions:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Then match each response.data.players[*].team.current_competitions[*] != '#null'
+</code></pre></div>    </div>
+  </li>
+  <li>Asserting that there is a team competing in “La Liga” competition:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Then match response.data.players[*].team.current_competitions[*] contains "La Liga"
+</code></pre></div>    </div>
+  </li>
+  <li>Asserting that there is a team competing in “La Liga” and “Copa Del Rey” competition:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>And def competitions = ["Copa Del Rey", "La Liga"]
+Then match response.data.players[*].team.current_competitions[*] contains competitions
+</code></pre></div>    </div>
+  </li>
+  <li>Asserting that there is no team competing in “La Liga” and “Bundesliga” competition:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># This is one of karate's own style wildcards
+# It might look unfamiliar. But you will get used to it in no time
+And def competitions = ["La Liga", "Bundesliga"]
+Then match response.data.players[*].team.current_competitions[*] !contains '#(^competitions)'
+</code></pre></div></div>
+
+<ul>
+  <li>Assert no error response is returned:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Then match response.errors == '#notpresent'
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>I can go on and on, but there are simply a lot of combinations to do. I suggest you try it by yourself using examples provided on my <a href="https://github.com/dnomyar90/football-karate-demo-graphql">repository</a>. You will be amazed on how simple yet powerful some of the assertions are in <a href="https://intuit.github.io/karate/">Karate</a>.</p>
+
+<p>Thanks for reading! I hope you found it useful!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#automated-test" class="page__taxonomy-item" rel="tag">automated test</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#karate" class="page__taxonomy-item" rel="tag">karate</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#automated-test" class="page__taxonomy-item" rel="tag">automated test</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#karate" class="page__taxonomy-item" rel="tag">karate</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-06-19T00:00:00+07:00">June 19, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=wongpuyuh&text=Powerful+GraphQL+Automated+Test+With+Karate%20http%3A%2F%2Flocalhost%3A4000%2Fkarate%2Fautomated%2520test%2Fkarate-graphql%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fkarate%2Fautomated%2520test%2Fkarate-graphql%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fkarate%2Fautomated%2520test%2Fkarate-graphql%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+            
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dnomyar90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/raymondsumargo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/wongpuyuh" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Raymond. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+
+  
+
+
+
+
+
+  </body>
+</html>

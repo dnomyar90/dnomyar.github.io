@@ -1,5 +1,5 @@
 # Site settings
-minimal_mistakes_skin: "dark"
+minimal_mistakes_skin: "contrast"
 locale: "en-US"
 title: "Dnomyar Space"
 subtitle: "Welcome to my space and time"
@@ -12,7 +12,7 @@ baseurl: "" # the subpath of your site, e.g. "/blog"
 repository: # Later
 teaser: # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 future: false
-words_per_minute: 200
+words_per_minute: 80
 comments:
   provider: staticman_v2
 staticman:
@@ -30,7 +30,7 @@ search: true
 author:
   name: "Raymond"
   avatar: "/assets/images/bio.jpg"
-  bio: "I walk into a bar. I order a beer. Order 0 beers. Order 999999 beers. Order a lizard. Order -1 beers. Order a ueicbksjdhd. Of course I order a DROP TABLE users beers too."
+  bio: "I walk into a bar. I order a beer. Order 0 beers. Order 999999 beers. Order a lizard. Order -1 beers. Order a ueicbksjdhd. Of course I order a DROP TABLE beers too."
   location: "Jakarta"
   links:
     - label: "GitHub"
