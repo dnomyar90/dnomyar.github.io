@@ -11,8 +11,6 @@ classes: wide
 
 - Personally I think Automated test is not meant to replace creative testing. Rather, it is a mean to take testing process to another level; to make it more efficient and effective.
 
-- Member of [Association for Software Testing](https://www.associationforsoftwaretesting.org/)
-
 # Tools
 Tools I use (or used) for testing purposes:
 - [Karate](https://intuit.github.io/karate/)
