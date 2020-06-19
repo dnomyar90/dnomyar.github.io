@@ -41,7 +41,7 @@ author:
       url: "https://linkedin.com/in/raymondsumargo"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/wongpuyo"
+      url: "https://twitter.com/wongpuyuh"
 
 # Site Footer
 footer:
@@ -54,7 +54,7 @@ footer:
       url: "https://linkedin.com/in/raymondsumargo"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/wongpuyo"
+      url: "https://twitter.com/wongpuyuh"
 
 # Reading Files
 include:
@@ -69,7 +69,7 @@ remote_theme: "mmistakes/minimal-mistakes"
 
 # Social Sharing
 twitter:
-  username               : "wongpuyo"
+  username               : "wongpuyuh"
 facebook:
   username               : "raymondlucky"
 
