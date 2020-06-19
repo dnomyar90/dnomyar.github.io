@@ -118,7 +118,7 @@ GraphQL is quite different from REST in terms of request's data type. Most of re
 After doing some research, we decided to go with [Karate](https://intuit.github.io/karate/). Karate provides the ability to deal with GraphQL out of the box. At the same time, it provides what I believe to be one of (*if not*) the most powerful assertions in the whole API testing world.
 
 ## Karate Test Framework
-Karate provides an out of the box support for GraphQL queries and mutations. Karate also supports REST, and even UI Automated Testing including desktop applications. Another very enticing feature is that we can reuse existing Karate API test scenarios as performance test. Yes, you hear it right. I will cover it in another article in the future.
+Karate provides an out of the box support for GraphQL queries and mutations. Karate also supports REST, and even UI Automated Testing including desktop applications. Karate runs parallelly by default. Another very enticing feature is that we can reuse existing Karate API test scenarios as performance test. Yes, you hear it right. I will cover it in another article in the future.
 
 But if you ask me what my most favourite feature of karate is, it would be it's insanely simple yet powerful assertion. GraphQL may be efficient and all that, but it can also gives you headache testing it. It is very likely you will encounter nested response on GraphQL applications. Based on my past experience on using [REST-Assured](http://rest-assured.io/), I already expected that I will have to deal with gruesome task asserting nested data.
 
