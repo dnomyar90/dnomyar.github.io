@@ -67,6 +67,13 @@ exclude:
 markdown: kramdown
 remote_theme: "mmistakes/minimal-mistakes"
 
+# Analytics
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-170130743-1"
+    anonymize_ip: false # default
+
 # Social Sharing
 twitter:
   username               : "wongpuyuh"
