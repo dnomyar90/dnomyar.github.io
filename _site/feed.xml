@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-19T15:06:17+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Selenium Overview &amp;amp; Setup</title><link href="http://localhost:4000/selenium/selenium-overview-setup/" rel="alternate" type="text/html" title="Selenium Overview &amp; Setup" /><published>2016-06-25T00:00:00+07:00</published><updated>2016-06-25T00:00:00+07:00</updated><id>http://localhost:4000/selenium/selenium-overview-setup</id><content type="html" xml:base="http://localhost:4000/selenium/selenium-overview-setup/">&lt;h2 id=&quot;quick-selenium-overview&quot;&gt;Quick Selenium Overview&lt;/h2&gt;
+&lt;p&gt;In this article we’ll explore what Selenium is and how to prep our environment to use it.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Selenium is an umbrella project for a range of tools and libraries that enable and support the automation of web browsers. - From &lt;a href=&quot;https://seleniumhq.github.io/docs/index.html&quot; target=&quot;_blank&quot;&gt;Selenium HQ&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Selenium enables us to:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Open browsers&lt;/li&gt;
+  &lt;li&gt;Navigate web pages&lt;/li&gt;
+  &lt;li&gt;Find web elements&lt;/li&gt;
+  &lt;li&gt;Manipulate web elements&lt;/li&gt;
+  &lt;li&gt;Run JavaScript&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;language-bindings&quot;&gt;Language Bindings&lt;/h3&gt;
+&lt;p&gt;First we’ll need to get the language bindings we want. The bindings will need to be downloaded and referenced in our project. Some IDE’s have package managers that will do this for us. We’ll talk more about how that’s done in separate articles. For now just know that we’ll need some language bindings to get Selenium to work.&lt;/p&gt;
+
+&lt;h3 id=&quot;webdrivers&quot;&gt;Webdrivers&lt;/h3&gt;
+&lt;p&gt;Selenium’s power comes from &lt;a href=&quot;http://docs.seleniumhq.org/docs/03_webdriver.jsp&quot; target=&quot;_blank&quot;&gt;webdrivers&lt;/a&gt;; called such because they “drive the web.” In the articles to come we’ll be using Chrome, Firefox, Edge and IE; we’ll need drivers for each.&lt;/p&gt;
+
+&lt;h4 id=&quot;chrome&quot;&gt;Chrome&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://sites.google.com/a/chromium.org/chromedriver/&quot; target=&quot;_blank&quot;&gt;ChromeDriver&lt;/a&gt; is a separate executable loaded by Selenium when Chrome is the desired browser. Download the latest driver and place it in an easily-accessible location. I keep mine in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:/webdrivers/&lt;/code&gt;. Download and install the latest &lt;a href=&quot;https://www.google.com/intl/en/chrome/browser/desktop/index.html&quot; target=&quot;_blank&quot;&gt;Chrome&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;firefox&quot;&gt;Firefox&lt;/h4&gt;
+&lt;p&gt;The &lt;a href=&quot;https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver&quot; target=&quot;_blank&quot;&gt;FirefoxDriver&lt;/a&gt; comes built-in with the Selenium language bindings. Download and install the latest &lt;a href=&quot;https://www.mozilla.org/en-US/firefox/all/&quot; target=&quot;_blank&quot;&gt;Firefox&lt;/a&gt;.
+Mozilla is working on a new driver for their browser called &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette&quot; target=&quot;_blank&quot;&gt;MarionetteDriver&lt;/a&gt;. However, it has not been released as of this writing. Feel free to download the latest driver and put it in the same location as the ChromeDriver.&lt;/p&gt;
+
+&lt;h4 id=&quot;edge&quot;&gt;Edge&lt;/h4&gt;
+&lt;p&gt;The &lt;a href=&quot;https://www.microsoft.com/en-us/download/details.aspx?id=48212&quot; target=&quot;_blank&quot;&gt;Microsoft WebDriver&lt;/a&gt; is a separate executable loaded up by Selenium when Edge is requested as a browser. Download the latest driver and keep it in the same location as the other driver(s). Make sure you have the latest updates for Edge.&lt;/p&gt;
+
+&lt;h4 id=&quot;ie&quot;&gt;IE&lt;/h4&gt;
+&lt;p&gt;The &lt;a href=&quot;http://docs.seleniumhq.org/download/&quot; target=&quot;_blank&quot;&gt;IEDriverServer&lt;/a&gt; is maintained and distributed by the Selenium group. Download the latest driver and put it in the same location as the other driver(s). Make sure you have the latest updates for IE.&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-to-path&quot;&gt;Adding to PATH&lt;/h3&gt;
+&lt;p&gt;Now that we have all the drivers we’ll want to use we need to add an entry to our PATH environment variable. If you’ve never done anything with environment variables I would recommend reading this &lt;a href=&quot;http://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/&quot; target=&quot;_blank&quot;&gt;guide&lt;/a&gt;. Follow the instructions and add the folder containing your webdrivers.&lt;/p&gt;
+
+&lt;p&gt;Now Selenium will be ready to go! Check out one of my other articles for the environment you want to use with Selenium:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/selenium/dotnet-selenium-mstest-quickstart&quot; target=&quot;_blank&quot;&gt;C#, Selenium &amp;amp; MSTest&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/selenium/js-selenium-mocha-quickstart&quot; target=&quot;_blank&quot;&gt;JavaScript, Selenium &amp;amp; Mocha&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thanks for reading! Be sure to share this post if you found it helpful and don’t hesitate to chat with me about it!&lt;/p&gt;</content><author><name>Raymond</name></author><category term="selenium" /><summary type="html">A quick overview of Selenium and guide on getting it ready for glory!</summary></entry><entry><title type="html">C# Selenium MSTest QuickStart Guide</title><link href="http://localhost:4000/selenium/dotnet-selenium-mstest-quickstart/" rel="alternate" type="text/html" title="C# Selenium MSTest QuickStart Guide" /><published>2016-06-18T00:00:00+07:00</published><updated>2016-06-18T00:00:00+07:00</updated><id>http://localhost:4000/selenium/dotnet-selenium-mstest-quickstart</id><content type="html" xml:base="http://localhost:4000/selenium/dotnet-selenium-mstest-quickstart/">&lt;h2 id=&quot;getting-started-with-c-selenium-and-mstest&quot;&gt;Getting started with C#, Selenium and MSTest!&lt;/h2&gt;
+&lt;p&gt;In this article we’ll be using MSTest and Selenium to write tests for web applications. This will be a starter project we can build on for various projects and in future articles.&lt;/p&gt;
+
+&lt;h3 id=&quot;requirements&quot;&gt;Requirements&lt;/h3&gt;
+&lt;p&gt;Here are the requirements before we get started:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx&quot; target=&quot;_blank&quot;&gt;Visual Studio&lt;/a&gt; (A Microsoft Integrated Development Environment or IDE)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.nuget.org/consume/installing-nuget&quot; target=&quot;_blank&quot;&gt;Nuget&lt;/a&gt; (A package manager for Visual Studio)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.seleniumhq.org/download/&quot; target=&quot;_blank&quot;&gt;Selenium C# language bindings&lt;/a&gt; (But we’ll use NuGet to grab these)&lt;/li&gt;
+  &lt;li&gt;Any browsers installed that you want to test &lt;a href=&quot;http://docs.seleniumhq.org/about/platforms.jsp&quot; target=&quot;_blank&quot;&gt;Supported Platforms&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;selenium-prep&quot;&gt;Selenium Prep&lt;/h3&gt;
+&lt;p&gt;If you haven’t read through my quick &lt;a href=&quot;/selenium/selenium-overview-setup/&quot;&gt;Overview of Selenium&lt;/a&gt; you should do that now. Selenium will need a few things configured before it’ll do its magic!&lt;/p&gt;
+
+&lt;h3 id=&quot;create-project&quot;&gt;Create Project&lt;/h3&gt;
+&lt;p&gt;To kick things off we’ll need a new project.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;File &amp;gt; New &amp;gt; Project&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/dotnet-selenium-mstest/new-project.png&quot; alt=&quot;Create a new project&quot; title=&quot;Create a new project&quot; /&gt;
+Select the Unit Test Project template (&lt;strong&gt;Templates &amp;gt; Visual C# &amp;gt; Test&lt;/strong&gt;), give it a name and configure some options. Press Ok to create the project. Visual Studio will create the project and open up your first UnitTest class.
+&lt;img src=&quot;http://localhost:4000/assets/images/dotnet-selenium-mstest/new-project-first-view.png&quot; alt=&quot;New project's first view&quot; title=&quot;New project's first view&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;importinstall-selenium&quot;&gt;Import/Install Selenium&lt;/h3&gt;
+&lt;p&gt;Now we’ll need to grab the Selenium DLLs and give our project access to them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tools &amp;gt; NuGet Package Manager &amp;gt; Manage NuGet Packages for Solution&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/dotnet-selenium-mstest/open-nuget.png&quot; alt=&quot;Open NuGet&quot; title=&quot;Open NuGet&quot; /&gt;
+Select Browse, search for ‘Selenium’ and install both Selenium.WebDriver and Selenium.Support for your new project.&lt;/p&gt;
+
+&lt;h3 id=&quot;write-test&quot;&gt;Write Test&lt;/h3&gt;
+&lt;p&gt;Now the fun begins; we can write the first Selenium test!
+We’ll write our test against &lt;a href=&quot;http://the-internet.herokuapp.com/&quot; target=&quot;_blank&quot;&gt;The Internet&lt;/a&gt;&lt;sup id=&quot;fnref:theinternet&quot;&gt;&lt;a href=&quot;#fn:theinternet&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here’s some code to put inside the &lt;strong&gt;TestMethod1()&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-c# highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//var driver = new OpenQA.Selenium.Firefox.FirefoxDriver&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//var driver = new OpenQA.Selenium.Edge.EdgeDriver&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//var driver = new OpenQA.Selenium.IE.InternetExplorerDriver&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpenQA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Selenium&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Chrome&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ChromeDriver&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Url&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://the-internet.herokuapp.com/&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;IsTrue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Title&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;The Internet&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Dispose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Get a web driver&lt;/li&gt;
+  &lt;li&gt;Set the URL property (tells the driver to go to that URL)&lt;/li&gt;
+  &lt;li&gt;Assert on the title of the driver&lt;/li&gt;
+  &lt;li&gt;Dispose of the driver&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;run-test&quot;&gt;Run Test&lt;/h3&gt;
+&lt;p&gt;Now that we have a functional test we can run it. First, if the Test Explorer isn’t displayed we need to add it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Test &amp;gt; Windows &amp;gt; Test Explorer&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Our test isn’t showing up yet. We need to build the solution for it to recognize that we’ve written a test it can run. Right click on the solution in the Solution Explorer and Build or Rebuild the solution. If the build is successful we should see our test show up in the Test Explorer. Now we can right click on our test and tell it to run. If all went according to plan we should see a Chrome window pop up, navigate to Google’s home page and then close.&lt;/p&gt;
+
+&lt;p&gt;This is a basic, and brittle, example of how Selenium works. If our assertion returns false the test will report a failure but the browser window will still be alive. This test is brittle in that it can’t run any code after the Assert if the Assert returns false. We’ll cover a much better testing approach in a later post to avoid such things! This is not an example of best practices by any means. This is to get you a working example of Selenium. Stay tuned for more posts on how to use Selenium and best practices for automating tests!&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading! I hope you found it helpful!&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:theinternet&quot;&gt;
+      &lt;p&gt;Credit to &lt;a href=&quot;http://davehaeffner.com/&quot; target=&quot;_blank&quot;&gt;Dave Haeffner&lt;/a&gt;. &lt;a href=&quot;#fnref:theinternet&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Raymond</name></author><category term="Selenium" /><category term="MSTest" /><category term="dotnet" /><category term="windows" /><summary type="html">A quick how-to on setting up a solution using MSTest and Selenium!</summary></entry></feed>

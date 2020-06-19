@@ -1,0 +1,125 @@
+# Site settings
+minimal_mistakes_skin: "dark"
+locale: "en-US"
+title: "Dnomyar Space"
+subtitle: "Welcome to my space and time"
+title_separator: "-"
+name: "Raymond"
+description: "All things about QA, programming, life, and traces of meme."
+github_username: "dnomyar90"
+url: https://www.dnomyar.dev # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl: "" # the subpath of your site, e.g. "/blog"
+repository: #StephenCavender/stephencavender.github.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+teaser: # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+future: false
+words_per_minute: 200
+comments:
+  provider: staticman_v2
+staticman:
+  allowedFields: ['name', 'email', 'url', 'message']
+  branch: "master"
+  commitMessage: "New comment by {fields.name}"
+  filename: comment-{@timestamp}
+  format: "yml"
+  moderation: true
+  path: "docs/_data/comments/{options.slug}" # "/_data/comments/{options.slug}" (default)
+  requiredFields: ['name', 'email', 'message']
+search: true
+
+# Site Author
+author:
+  name: "Raymond"
+  avatar: "/assets/images/bio.jpg"
+  bio: "I walk into a bar. I order a beer. Order 0 beers. Order 999999 beers. Order a lizard. Order -1 beers. Order a ueicbksjdhd. Of course I order a DROP TABLE users beers too."
+  location: "Jakarta"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/dnomyar90"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/raymondsumargo"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/wongpuyo"
+
+# Site Footer
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/dnomyar90"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/raymondsumargo"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/wongpuyo"
+
+# Reading Files
+include:
+  - _pages
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+# Build settings
+markdown: kramdown
+remote_theme: "mmistakes/minimal-mistakes"
+
+# Outputting
+permalink: /:categories/:title/
+paginate: 5 # amount of posts to show
+paginate_path: /page:num/
+timezone: Asia/Jakarta # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
+
+# Archives
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+
+# Collections
+collections:
+  work:
+    output: true
+    permalink: /:collection/:path/
+
+# Post/Page and collection defaults
+defaults:
+  # Posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # Pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+      share: false
+  # Work
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
