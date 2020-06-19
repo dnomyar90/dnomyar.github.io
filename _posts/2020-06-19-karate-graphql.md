@@ -1,5 +1,5 @@
 ---
-title: Powerful GraphQL Automated Test With Karate
+title: Powerful GraphQL Automated Test Using Karate
 date: 2020-06-19
 modified: 2020-06-19
 categories: [karate, automated test]
