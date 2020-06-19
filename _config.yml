@@ -67,6 +67,12 @@ exclude:
 markdown: kramdown
 remote_theme: "mmistakes/minimal-mistakes"
 
+# Social Sharing
+twitter:
+  username               : "wongpuyo"
+facebook:
+  username               : "raymondlucky"
+
 # Outputting
 permalink: /:categories/:title/
 paginate: 5 # amount of posts to show
