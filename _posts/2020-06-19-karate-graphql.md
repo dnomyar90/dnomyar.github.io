@@ -14,7 +14,7 @@ header:
 ---
 
 ## What is GraphQL
-Most of us probably already know about REST, as REST seems to be the go-to standard for APIs. Some of us may be thinking, what GraphQL is? How is it different from REST? Well I was thinking the same when I first interviewed at [kumparan](https://kumparan.com/).
+Most of us probably already know about REST, as REST seems to be the go-to standard for APIs. Some of us may be thinking, what is a GraphQL? How is it different from REST? Well I was thinking the same when I first interviewed at [kumparan](https://kumparan.com/).
 
 I had no idea whatsoever of what GraphQL is about, let alone how to test it. But after dealing with (testing) GraphQLs for 1 year, I cannot look at traditional REST API the same way again. GraphQL really solves the over-fetching problem of REST.
 
