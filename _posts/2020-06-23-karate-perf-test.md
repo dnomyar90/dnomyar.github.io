@@ -43,7 +43,7 @@ The focus of Performance Testing is checking a software program's:
 We will learn how to set up and run karate tests as performance test. All the code can be found on the [repository](https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa){:target="_blank"}. Let's get started!
 
 
-For the sake of providing context, below is how the karate tests we use for load test will look like:
+For the sake of providing context, below is how the karate tests we use for performance test will look like:
 
 ```
 @mutation
@@ -114,16 +114,16 @@ Before we proceed to write our performance test, we need to add dependecy and pl
 The dependency and plugin above will enable us to write scala tests on top of existing karate features. Writing scala performance test is relatively straightforward. Below is the sample of a performance test on scala. Again no need to worry, all of these can be found on the [repository](https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa){:target="_blank"}
 
 ```
-package loadtest
+package perftest
 
 import com.intuit.karate.gatling.PreDef._
 import io.gatling.core.Predef._
 import scala.concurrent.duration._
 
-class LoadTests extends Simulation {
+class PerfTests extends Simulation {
 
   before {
-    println("Load tests started")
+    println("Perf tests started")
   }
   
   // Amount of ramp users
@@ -151,13 +151,13 @@ class LoadTests extends Simulation {
     )
 
   after {
-    println("Load tests ended")
+    println("Perf tests ended")
   }
 
 } 
 ```
 
-Quite straightforward right? The scala script executes `FindPlayers` and `InsertPlayer` tests by injecting two different scenarios. For `InsertPlayer` we inject 10 ramp users in 10 seconds duration. On the other hand for `FindPlayers` we inject 1 to 5 concurrent ramp users in 10 seconds duration. We then assert that the maximum response time is 500ms (_The sample GraphQL apps is indeed very bad in performance_ 🤣) and success rate of endpoints are ate 95%.
+Quite straightforward right? The scala script executes `FindPlayers` and `InsertPlayer` tests by injecting two different scenarios. For `InsertPlayer` we inject 10 ramp users in 10 seconds duration. On the other hand for `FindPlayers` we inject 1 to 5 concurrent ramp users in 10 seconds duration. We then assert that the maximum response time is 500ms (_The sample GraphQL apps is indeed very bad in performance_ 🤣) and success rate of endpoints are at 95%.
 
 > What is ramp users?
 >
@@ -173,11 +173,11 @@ We then can run the scala test we have written by running this command:
 mvn clean test-compile gatling:test
 ```
 
-Or if you have clone the [repository](https://github.com/dnomyar90/football-karate-demo-graphql/){:target="_blank"}, you can just go to folder `qa` and run `./run-load-test.sh`
+Or if you have clone the [repository](https://github.com/dnomyar90/football-karate-demo-graphql/){:target="_blank"}, you can just go to folder `qa` and run `./run-perf-test.sh`
 
 ```
 cd qa
-./run-load-test.sh
+./run-perf-test.sh
 ```
 
 
