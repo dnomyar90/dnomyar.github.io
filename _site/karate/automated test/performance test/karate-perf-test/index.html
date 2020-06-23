@@ -371,7 +371,7 @@
 
 <p>We will learn how to set up and run karate tests as performance test. All the code can be found on the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa" target="_blank">repository</a>. Let’s get started!</p>
 
-<p>For the sake of providing context, below is how the karate tests we use for load test will look like:</p>
+<p>For the sake of providing context, below is how the karate tests we use for performance test will look like:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@mutation
 Feature: Test GraphQL Insert Player (mutation)
@@ -438,16 +438,16 @@ Feature: Test GraphQL Insert Player (mutation)
 
 <p>The dependency and plugin above will enable us to write scala tests on top of existing karate features. Writing scala performance test is relatively straightforward. Below is the sample of a performance test on scala. Again no need to worry, all of these can be found on the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa" target="_blank">repository</a></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package loadtest
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package perftest
 
 import com.intuit.karate.gatling.PreDef._
 import io.gatling.core.Predef._
 import scala.concurrent.duration._
 
-class LoadTests extends Simulation {
+class PerfTests extends Simulation {
 
   before {
-    println("Load tests started")
+    println("Perf tests started")
   }
   
   // Amount of ramp users
@@ -475,13 +475,13 @@ class LoadTests extends Simulation {
     )
 
   after {
-    println("Load tests ended")
+    println("Perf tests ended")
   }
 
 } 
 </code></pre></div></div>
 
-<p>Quite straightforward right? The scala script executes <code class="language-plaintext highlighter-rouge">FindPlayers</code> and <code class="language-plaintext highlighter-rouge">InsertPlayer</code> tests by injecting two different scenarios. For <code class="language-plaintext highlighter-rouge">InsertPlayer</code> we inject 10 ramp users in 10 seconds duration. On the other hand for <code class="language-plaintext highlighter-rouge">FindPlayers</code> we inject 1 to 5 concurrent ramp users in 10 seconds duration. We then assert that the maximum response time is 500ms (<em>The sample GraphQL apps is indeed very bad in performance</em> 🤣) and success rate of endpoints are ate 95%.</p>
+<p>Quite straightforward right? The scala script executes <code class="language-plaintext highlighter-rouge">FindPlayers</code> and <code class="language-plaintext highlighter-rouge">InsertPlayer</code> tests by injecting two different scenarios. For <code class="language-plaintext highlighter-rouge">InsertPlayer</code> we inject 10 ramp users in 10 seconds duration. On the other hand for <code class="language-plaintext highlighter-rouge">FindPlayers</code> we inject 1 to 5 concurrent ramp users in 10 seconds duration. We then assert that the maximum response time is 500ms (<em>The sample GraphQL apps is indeed very bad in performance</em> 🤣) and success rate of endpoints are at 95%.</p>
 
 <blockquote>
   <p>What is ramp users?</p>
@@ -498,10 +498,10 @@ class LoadTests extends Simulation {
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean test-compile gatling:test
 </code></pre></div></div>
 
-<p>Or if you have clone the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/" target="_blank">repository</a>, you can just go to folder <code class="language-plaintext highlighter-rouge">qa</code> and run <code class="language-plaintext highlighter-rouge">./run-load-test.sh</code></p>
+<p>Or if you have clone the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/" target="_blank">repository</a>, you can just go to folder <code class="language-plaintext highlighter-rouge">qa</code> and run <code class="language-plaintext highlighter-rouge">./run-perf-test.sh</code></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd qa
-./run-load-test.sh
+./run-perf-test.sh
 </code></pre></div></div>
 
 <h2 id="performance-test-with-karate--result">Performance Test With Karate – Result</h2>
