@@ -38,7 +38,7 @@ The focus of Performance Testing is checking a software program's:
 [^guru99]: Credit to [Guru99](https://www.guru99.com/performance-testing.html){:target="_blank"}.
 
 ## Performance Test With Karate
-Karate provides the ability to reuse your existing API tests as performance test. This means that you do not need to write your performance test from scratch. All the assertions and scenarios on your existing tests can be reused!
+[Karate](https://intuit.github.io/karate/){:target="_blank"} provides the ability to reuse your existing karate API tests as performance test. This means that you do not need to write your performance test from scratch. All the assertions and scenarios on your existing tests can be reused!
 
 We will learn how to set up and run karate tests as performance test. All the code can be found on the [repository](https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa){:target="_blank"}. Let's get started!
 
