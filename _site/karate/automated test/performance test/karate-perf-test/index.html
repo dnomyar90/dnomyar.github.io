@@ -1,0 +1,759 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Reusing Karate Tests as Performance Test - Dnomyar Space</title>
+<meta name="description" content="Quickly set up your first performance test with karate. No need to write your performance test from scratch. Just reuse your existing tests!">
+
+
+  <meta name="author" content="Raymond">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Dnomyar Space">
+<meta property="og:title" content="Reusing Karate Tests as Performance Test">
+<meta property="og:url" content="http://localhost:4000/karate/automated%20test/performance%20test/karate-perf-test/">
+
+
+  <meta property="og:description" content="Quickly set up your first performance test with karate. No need to write your performance test from scratch. Just reuse your existing tests!">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/reuse-karate-perf/perftest.jpg">
+
+
+
+  <meta name="twitter:site" content="@wongpuyuh">
+  <meta name="twitter:title" content="Reusing Karate Tests as Performance Test">
+  <meta name="twitter:description" content="Quickly set up your first performance test with karate. No need to write your performance test from scratch. Just reuse your existing tests!">
+  <meta name="twitter:url" content="http://localhost:4000/karate/automated%20test/performance%20test/karate-perf-test/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/reuse-karate-perf/perftest.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-06-23T00:00:00+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/karate/automated%20test/performance%20test/karate-perf-test/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Raymond",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Dnomyar Space Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Dnomyar Space
+          <span class="site-subtitle">Welcome to my space and time</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Articles</a>
+            </li><li class="masthead__menu-item">
+              <a href="/work/">About Me</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/images/reuse-karate-perf/perftest.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Reusing Karate Tests as Performance Test
+
+        
+      </h1>
+      
+        <p class="page__lead">Quickly set up your first performance test with karate. No need to write your performance test from scratch. Just reuse your existing tests!
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Photo by <a href="https://unsplash.com/@antonjphotos">Anton Jansson</a> on <a href="https://unsplash.com">Unsplash</a>
+</span>
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio.jpg" alt="Raymond" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Raymond</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>I walk into a bar. I order a beer. Order 0 beers. Order 999999 beers. Order a lizard. Order -1 beers. Order a ueicbksjdhd. Of course I order a DROP TABLE beers too.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Jakarta</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://github.com/dnomyar90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://linkedin.com/in/raymondsumargo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/wongpuyuh" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Reusing Karate Tests as Performance Test">
+    <meta itemprop="description" content="Quickly set up your first performance test with karate. No need to write your performance test from scratch. Just reuse your existing tests!">
+    <meta itemprop="datePublished" content="2020-06-23T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="karate-tests-prep">Karate Tests Prep</h2>
+<p>If you haven’t read through my article <a href="https://dnomyar.dev/karate/automated%20test/karate-graphql" target="_blank">Powerful GraphQL Automated Test Using Karate</a>, you should do that now. You will need to know how Karate test works before proceeding with this one 😉</p>
+
+<h2 id="what-is-performance-testing">What is Performance Testing?</h2>
+
+<p>Performance testing checks the speed, response time, reliability, resource usage, scalability of a software program under their expected workload. The purpose of Performance Testing is not to find functional defects but to eliminate performance bottlenecks in the software or device.</p>
+
+<p><img src="http://localhost:4000/assets/images/reuse-karate-perf/graph.jpg" alt="Graph" title="Graph" height="50%" width="70%" /></p>
+
+<p><sub align="center">
+<a href="https://unsplash.com/photos/0jTZTMyGym8" target="_blank">Illustration</a> of performance testing
+</sub></p>
+
+<p>The focus of Performance Testing is checking a software program’s:</p>
+
+<ul>
+  <li>Speed - Determines whether the application responds quickly</li>
+  <li>Scalability - Determines maximum user load the software application can handle.</li>
+  <li>Stability - Determines if the application is stable under varying loads</li>
+</ul>
+
+<p><sub>*Quoted from <a href="https://www.guru99.com/performance-testing.html" target="_blank">Guru99</a><sup id="fnref:guru99"><a href="#fn:guru99" class="footnote">1</a></sup></sub></p>
+
+<h2 id="performance-test-with-karate">Performance Test With Karate</h2>
+<p>Karate provides the ability to reuse your existing API tests as performance test. This means that you do not need to write your performance test from scratch. All the assertions and scenarios on your existing tests can be reused!</p>
+
+<p>We will learn how to set up and run karate tests as performance test. All the code can be found on the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa" target="_blank">repository</a>. Let’s get started!</p>
+
+<p>For the sake of providing context, below is how the karate tests we use for load test will look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@mutation
+Feature: Test GraphQL Insert Player (mutation)
+
+    Background:
+        Given url baseUrl
+
+    Scenario: Insert a player
+
+    # Read GraphQL file
+    Given def query = read('graphql/insertplayer.graphql')
+
+    # Declare random variables for the request (in JSON format)
+    And def variables = {last_name: '#(faker.randomLastName())',first_name:'#(faker.randomFirstName())', team_id:2}
+
+    # Prepare the request
+    And request { query: '#(query)', variables: '#(variables)' }
+    When method POST
+    Then status 200
+
+    # Parse string as integer &amp; assert with existing variable
+    And match response.data.player.first_name == variables.first_name
+    And match response.data.player.last_name == variables.last_name
+
+    # Assert that there is no error
+    And match response.errors == '#notpresent'
+</code></pre></div></div>
+
+<p>Before we proceed to write our performance test, we need to add dependecy and plugin on our <code class="language-plaintext highlighter-rouge">pom.xml</code>. There is no need to worry, for everything has been added on the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/blob/master/qa/pom.xml" target="_blank">repository</a> 😄</p>
+
+<p><strong>Dependency:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;dependency&gt;
+        &lt;groupId&gt;com.intuit.karate&lt;/groupId&gt;
+        &lt;artifactId&gt;karate-gatling&lt;/artifactId&gt;
+        &lt;version&gt;0.9.5.RC3&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre></div></div>
+
+<p><strong>Plugin:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;plugin&gt;
+	&lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;
+	&lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;4.3.1&lt;/version&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+			&lt;id&gt;scala-test-compile&lt;/id&gt;
+			&lt;phase&gt;process-test-resources&lt;/phase&gt;
+			&lt;goals&gt;
+				&lt;goal&gt;testCompile&lt;/goal&gt;
+			&lt;/goals&gt;
+		&lt;/execution&gt;
+	&lt;/executions&gt;
+&lt;/plugin&gt;
+&lt;plugin&gt;
+	&lt;groupId&gt;io.gatling&lt;/groupId&gt;
+	&lt;artifactId&gt;gatling-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;3.0.5&lt;/version&gt;
+	&lt;configuration&gt;
+		&lt;simulationsFolder&gt;src/test/java/simulations&lt;/simulationsFolder&gt;
+	&lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre></div></div>
+
+<p>The dependency and plugin above will enable us to write scala tests on top of existing karate features. Writing scala performance test is relatively straightforward. Below is the sample of a performance test on scala. Again no need to worry, all of these can be found on the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa" target="_blank">repository</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package loadtest
+
+import com.intuit.karate.gatling.PreDef._
+import io.gatling.core.Predef._
+import scala.concurrent.duration._
+
+class LoadTests extends Simulation {
+
+  before {
+    println("Load tests started")
+  }
+  
+  // Amount of ramp users
+  val amountRampUsers: Int = 10
+
+  // Duration of ramp
+  val amountRampDuration: Int = 10
+
+  val playersTestQuery = scenario("Query Players")
+    .exec(
+      karateFeature("classpath:features/FindPlayers.feature")
+    )
+
+    val playersTestMutation = scenario("Mutation Players")
+    .exec(
+      karateFeature("classpath:features/InsertPlayer.feature")
+    )
+
+  setUp(
+    playersTestMutation.inject(rampUsers(amountRampUsers) during amountRampDuration),
+    playersTestQuery.inject(rampConcurrentUsers(1) to (5) during amountRampDuration)
+    ).assertions(
+        global.responseTime.max.lt(500),
+        global.successfulRequests.percent.gt(95)
+    )
+
+  after {
+    println("Load tests ended")
+  }
+
+} 
+</code></pre></div></div>
+
+<p>Quite straightforward right? The scala script executes <code class="language-plaintext highlighter-rouge">FindPlayers</code> and <code class="language-plaintext highlighter-rouge">InsertPlayer</code> tests by injecting two different scenarios. For <code class="language-plaintext highlighter-rouge">InsertPlayer</code> we inject 10 ramp users in 10 seconds duration. On the other hand for <code class="language-plaintext highlighter-rouge">FindPlayers</code> we inject 1 to 5 concurrent ramp users in 10 seconds duration. We then assert that the maximum response time is 500ms (<em>The sample GraphQL apps is indeed very bad in performance</em> 🤣) and success rate of endpoints are ate 95%.</p>
+
+<blockquote>
+  <p>What is ramp users?</p>
+
+  <p>What is concurrent ramp users?</p>
+</blockquote>
+
+<p><strong>Great question!</strong></p>
+
+<p>For the <code class="language-plaintext highlighter-rouge">InsertPlayer</code> test, we set maximum numbers of users accessing the endpoint to 10 users in 10 seconds duration. Meanwhile for the <code class="language-plaintext highlighter-rouge">FindPlayers</code> we set concurrent users accessing the endpoint between 1 to 5 users for 10 seconds. You can find the whole documentation of gatling <a href="https://gatling.io/docs/current/general/simulation_setup" target="_blank">here</a>. You can have all combinations for assertion that suits your need for performance testing. All of scala injection and assertion is quite straightforward and should not be hard to implement!</p>
+
+<p>We then can run the scala test we have written by running this command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean test-compile gatling:test
+</code></pre></div></div>
+
+<p>Or if you have clone the <a href="https://github.com/dnomyar90/football-karate-demo-graphql/" target="_blank">repository</a>, you can just go to folder <code class="language-plaintext highlighter-rouge">qa</code> and run <code class="language-plaintext highlighter-rouge">./run-load-test.sh</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd qa
+./run-load-test.sh
+</code></pre></div></div>
+
+<h2 id="performance-test-with-karate--result">Performance Test With Karate – Result</h2>
+
+<ul>
+  <li>The test will trigger success if all the assertion on our scala test script is fulfilled. Otherwise it will signal an error.</li>
+</ul>
+
+<p><img src="http://localhost:4000/assets/images/reuse-karate-perf/gatling-console.png" alt="Console" title="Console" height="90%" width="90%" /></p>
+<p align="center">
+<i>Console execution result</i>
+</p>
+
+<ul>
+  <li><strong>Execution result of our performance test</strong>. It shows all information you need in brief. The information includes request per seconds, response time percentiles, number of success and failed requests, etc. This is typically good for your overview dashboard.</li>
+</ul>
+
+<p><img src="http://localhost:4000/assets/images/reuse-karate-perf/gatling-overview.png" alt="Overview" title="Overview" height="90%" width="90%" /></p>
+<p align="center">
+<i>Overview execution result</i>
+</p>
+
+<ul>
+  <li><strong>Detailed execution result of our performance test</strong>. It shows the detailed information including response time percentiles, response time distribution, number of responses per second, etc.</li>
+</ul>
+
+<p><img src="http://localhost:4000/assets/images/reuse-karate-perf/gatling-response-time.png" alt="Detailed" title="Detailed" height="90%" width="90%" /></p>
+<p align="center">
+<i>Detailed execution result</i>
+</p>
+
+<p>Alright, that’s a wrap. Thanks for reading! I hope you find this it useful and you can implement it to increase the overall quality of your product.</p>
+
+<h1 id="repository"><a href="https://dnomyar.dev/karate/automated%20test/karate-graphql" target="_blank">Repository</a></h1>
+<div class="footnotes">
+  <ol>
+    <li id="fn:guru99">
+      <p>Credit to <a href="https://www.guru99.com/performance-testing.html" target="_blank">Guru99</a>. <a href="#fnref:guru99" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#automated-test" class="page__taxonomy-item" rel="tag">automated test</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#karate" class="page__taxonomy-item" rel="tag">karate</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#performance-test" class="page__taxonomy-item" rel="tag">performance test</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#automated-test" class="page__taxonomy-item" rel="tag">automated test</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#karate" class="page__taxonomy-item" rel="tag">karate</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#performance-test" class="page__taxonomy-item" rel="tag">performance test</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-06-23T00:00:00+07:00">June 23, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=wongpuyuh&text=Reusing+Karate+Tests+as+Performance+Test%20http%3A%2F%2Flocalhost%3A4000%2Fkarate%2Fautomated%2520test%2Fperformance%2520test%2Fkarate-perf-test%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fkarate%2Fautomated%2520test%2Fperformance%2520test%2Fkarate-perf-test%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fkarate%2Fautomated%2520test%2Fperformance%2520test%2Fkarate-perf-test%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/karate/automated%20test/karate-graphql/" class="pagination--pager" title="Powerful GraphQL Automated Test Using Karate
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/karate/automated%20test/karate-graphql/" rel="permalink">Powerful GraphQL Automated Test Using Karate
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Demo of karate test framework for GraphQL application. Sample GraphQL application is provided.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dnomyar90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/raymondsumargo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/wongpuyuh" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Raymond. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+
+  
+
+
+
+
+
+  </body>
+</html>
