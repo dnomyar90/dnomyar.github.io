@@ -1,4 +1,203 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-19T23:10:52+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Powerful GraphQL Automated Test Using Karate</title><link href="http://localhost:4000/karate/automated%20test/karate-graphql/" rel="alternate" type="text/html" title="Powerful GraphQL Automated Test Using Karate" /><published>2020-06-19T00:00:00+07:00</published><updated>2020-06-19T00:00:00+07:00</updated><id>http://localhost:4000/karate/automated%20test/karate-graphql</id><content type="html" xml:base="http://localhost:4000/karate/automated%20test/karate-graphql/">&lt;h2 id=&quot;what-is-graphql&quot;&gt;What is GraphQL&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-24T00:23:05+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Reusing Karate Tests as Performance Test</title><link href="http://localhost:4000/karate/automated%20test/performance%20test/karate-perf-test/" rel="alternate" type="text/html" title="Reusing Karate Tests as Performance Test" /><published>2020-06-23T00:00:00+07:00</published><updated>2020-06-23T00:00:00+07:00</updated><id>http://localhost:4000/karate/automated%20test/performance%20test/karate-perf-test</id><content type="html" xml:base="http://localhost:4000/karate/automated%20test/performance%20test/karate-perf-test/">&lt;h2 id=&quot;karate-tests-prep&quot;&gt;Karate Tests Prep&lt;/h2&gt;
+&lt;p&gt;If you haven’t read through my article &lt;a href=&quot;https://dnomyar.dev/karate/automated%20test/karate-graphql&quot; target=&quot;_blank&quot;&gt;Powerful GraphQL Automated Test Using Karate&lt;/a&gt;, you should do that now. You will need to know how Karate test works before proceeding with this one 😉&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-performance-testing&quot;&gt;What is Performance Testing?&lt;/h2&gt;
+
+&lt;p&gt;Performance testing checks the speed, response time, reliability, resource usage, scalability of a software program under their expected workload. The purpose of Performance Testing is not to find functional defects but to eliminate performance bottlenecks in the software or device.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/reuse-karate-perf/graph.jpg&quot; alt=&quot;Graph&quot; title=&quot;Graph&quot; height=&quot;50%&quot; width=&quot;70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;sub align=&quot;center&quot;&gt;
+&lt;a href=&quot;https://unsplash.com/photos/0jTZTMyGym8&quot; target=&quot;_blank&quot;&gt;Illustration&lt;/a&gt; of performance testing
+&lt;/sub&gt;&lt;/p&gt;
+
+&lt;p&gt;The focus of Performance Testing is checking a software program’s:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Speed - Determines whether the application responds quickly&lt;/li&gt;
+  &lt;li&gt;Scalability - Determines maximum user load the software application can handle.&lt;/li&gt;
+  &lt;li&gt;Stability - Determines if the application is stable under varying loads&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;sub&gt;*Quoted from &lt;a href=&quot;https://www.guru99.com/performance-testing.html&quot; target=&quot;_blank&quot;&gt;Guru99&lt;/a&gt;&lt;sup id=&quot;fnref:guru99&quot;&gt;&lt;a href=&quot;#fn:guru99&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/sub&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;performance-test-with-karate&quot;&gt;Performance Test With Karate&lt;/h2&gt;
+&lt;p&gt;Karate provides the ability to reuse your existing API tests as performance test. This means that you do not need to write your performance test from scratch. All the assertions and scenarios on your existing tests can be reused!&lt;/p&gt;
+
+&lt;p&gt;We will learn how to set up and run karate tests as performance test. All the code can be found on the &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt;. Let’s get started!&lt;/p&gt;
+
+&lt;p&gt;For the sake of providing context, below is how the karate tests we use for load test will look like:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@mutation
+Feature: Test GraphQL Insert Player (mutation)
+
+    Background:
+        Given url baseUrl
+
+    Scenario: Insert a player
+
+    # Read GraphQL file
+    Given def query = read('graphql/insertplayer.graphql')
+
+    # Declare random variables for the request (in JSON format)
+    And def variables = {last_name: '#(faker.randomLastName())',first_name:'#(faker.randomFirstName())', team_id:2}
+
+    # Prepare the request
+    And request { query: '#(query)', variables: '#(variables)' }
+    When method POST
+    Then status 200
+
+    # Parse string as integer &amp;amp; assert with existing variable
+    And match response.data.player.first_name == variables.first_name
+    And match response.data.player.last_name == variables.last_name
+
+    # Assert that there is no error
+    And match response.errors == '#notpresent'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Before we proceed to write our performance test, we need to add dependecy and plugin on our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt;. There is no need to worry, for everything has been added on the &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/blob/master/qa/pom.xml&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt; 😄&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Dependency:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &amp;lt;dependency&amp;gt;
+        &amp;lt;groupId&amp;gt;com.intuit.karate&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;karate-gatling&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;0.9.5.RC3&amp;lt;/version&amp;gt;
+        &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Plugin:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &amp;lt;plugin&amp;gt;
+	&amp;lt;groupId&amp;gt;net.alchim31.maven&amp;lt;/groupId&amp;gt;
+	&amp;lt;artifactId&amp;gt;scala-maven-plugin&amp;lt;/artifactId&amp;gt;
+	&amp;lt;version&amp;gt;4.3.1&amp;lt;/version&amp;gt;
+	&amp;lt;executions&amp;gt;
+		&amp;lt;execution&amp;gt;
+			&amp;lt;id&amp;gt;scala-test-compile&amp;lt;/id&amp;gt;
+			&amp;lt;phase&amp;gt;process-test-resources&amp;lt;/phase&amp;gt;
+			&amp;lt;goals&amp;gt;
+				&amp;lt;goal&amp;gt;testCompile&amp;lt;/goal&amp;gt;
+			&amp;lt;/goals&amp;gt;
+		&amp;lt;/execution&amp;gt;
+	&amp;lt;/executions&amp;gt;
+&amp;lt;/plugin&amp;gt;
+&amp;lt;plugin&amp;gt;
+	&amp;lt;groupId&amp;gt;io.gatling&amp;lt;/groupId&amp;gt;
+	&amp;lt;artifactId&amp;gt;gatling-maven-plugin&amp;lt;/artifactId&amp;gt;
+	&amp;lt;version&amp;gt;3.0.5&amp;lt;/version&amp;gt;
+	&amp;lt;configuration&amp;gt;
+		&amp;lt;simulationsFolder&amp;gt;src/test/java/simulations&amp;lt;/simulationsFolder&amp;gt;
+	&amp;lt;/configuration&amp;gt;
+&amp;lt;/plugin&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The dependency and plugin above will enable us to write scala tests on top of existing karate features. Writing scala performance test is relatively straightforward. Below is the sample of a performance test on scala. Again no need to worry, all of these can be found on the &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package loadtest
+
+import com.intuit.karate.gatling.PreDef._
+import io.gatling.core.Predef._
+import scala.concurrent.duration._
+
+class LoadTests extends Simulation {
+
+  before {
+    println(&quot;Load tests started&quot;)
+  }
+  
+  // Amount of ramp users
+  val amountRampUsers: Int = 10
+
+  // Duration of ramp
+  val amountRampDuration: Int = 10
+
+  val playersTestQuery = scenario(&quot;Query Players&quot;)
+    .exec(
+      karateFeature(&quot;classpath:features/FindPlayers.feature&quot;)
+    )
+
+    val playersTestMutation = scenario(&quot;Mutation Players&quot;)
+    .exec(
+      karateFeature(&quot;classpath:features/InsertPlayer.feature&quot;)
+    )
+
+  setUp(
+    playersTestMutation.inject(rampUsers(amountRampUsers) during amountRampDuration),
+    playersTestQuery.inject(rampConcurrentUsers(1) to (5) during amountRampDuration)
+    ).assertions(
+        global.responseTime.max.lt(500),
+        global.successfulRequests.percent.gt(95)
+    )
+
+  after {
+    println(&quot;Load tests ended&quot;)
+  }
+
+} 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Quite straightforward right? The scala script executes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FindPlayers&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;InsertPlayer&lt;/code&gt; tests by injecting two different scenarios. For &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;InsertPlayer&lt;/code&gt; we inject 10 ramp users in 10 seconds duration. On the other hand for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FindPlayers&lt;/code&gt; we inject 1 to 5 concurrent ramp users in 10 seconds duration. We then assert that the maximum response time is 500ms (&lt;em&gt;The sample GraphQL apps is indeed very bad in performance&lt;/em&gt; 🤣) and success rate of endpoints are ate 95%.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What is ramp users?&lt;/p&gt;
+
+  &lt;p&gt;What is concurrent ramp users?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Great question!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;InsertPlayer&lt;/code&gt; test, we set maximum numbers of users accessing the endpoint to 10 users in 10 seconds duration. Meanwhile for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FindPlayers&lt;/code&gt; we set concurrent users accessing the endpoint between 1 to 5 users for 10 seconds. You can find the whole documentation of gatling &lt;a href=&quot;https://gatling.io/docs/current/general/simulation_setup&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;. You can have all combinations for assertion that suits your need for performance testing. All of scala injection and assertion is quite straightforward and should not be hard to implement!&lt;/p&gt;
+
+&lt;p&gt;We then can run the scala test we have written by running this command:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mvn clean test-compile gatling:test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Or if you have clone the &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt;, you can just go to folder &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qa&lt;/code&gt; and run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./run-load-test.sh&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd qa
+./run-load-test.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;performance-test-with-karate--result&quot;&gt;Performance Test With Karate – Result&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The test will trigger success if all the assertion on our scala test script is fulfilled. Otherwise it will signal an error.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/reuse-karate-perf/gatling-console.png&quot; alt=&quot;Console&quot; title=&quot;Console&quot; height=&quot;90%&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+&lt;i&gt;Console execution result&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Execution result of our performance test&lt;/strong&gt;. It shows all information you need in brief. The information includes request per seconds, response time percentiles, number of success and failed requests, etc. This is typically good for your overview dashboard.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/reuse-karate-perf/gatling-overview.png&quot; alt=&quot;Overview&quot; title=&quot;Overview&quot; height=&quot;90%&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+&lt;i&gt;Overview execution result&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Detailed execution result of our performance test&lt;/strong&gt;. It shows the detailed information including response time percentiles, response time distribution, number of responses per second, etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/reuse-karate-perf/gatling-response-time.png&quot; alt=&quot;Detailed&quot; title=&quot;Detailed&quot; height=&quot;90%&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+&lt;i&gt;Detailed execution result&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Alright, that’s a wrap. Thanks for reading! I hope you find this it useful and you can implement it to increase the overall quality of your product.&lt;/p&gt;
+
+&lt;h1 id=&quot;repository&quot;&gt;&lt;a href=&quot;https://dnomyar.dev/karate/automated%20test/karate-graphql&quot; target=&quot;_blank&quot;&gt;Repository&lt;/a&gt;&lt;/h1&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:guru99&quot;&gt;
+      &lt;p&gt;Credit to &lt;a href=&quot;https://www.guru99.com/performance-testing.html&quot; target=&quot;_blank&quot;&gt;Guru99&lt;/a&gt;. &lt;a href=&quot;#fnref:guru99&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Raymond</name></author><category term="karate" /><category term="automated test" /><category term="performance test" /><summary type="html">Quickly set up your first performance test with karate. No need to write your performance test from scratch. Just reuse your existing tests!</summary></entry><entry><title type="html">Powerful GraphQL Automated Test Using Karate</title><link href="http://localhost:4000/karate/automated%20test/karate-graphql/" rel="alternate" type="text/html" title="Powerful GraphQL Automated Test Using Karate" /><published>2020-06-19T00:00:00+07:00</published><updated>2020-06-19T00:00:00+07:00</updated><id>http://localhost:4000/karate/automated%20test/karate-graphql</id><content type="html" xml:base="http://localhost:4000/karate/automated%20test/karate-graphql/">&lt;h2 id=&quot;what-is-graphql&quot;&gt;What is GraphQL&lt;/h2&gt;
 &lt;p&gt;Most of us probably already know about REST, as REST seems to be the go-to standard for APIs. Some of us may be thinking, what is a GraphQL? How is it different from REST? Well I was thinking the same when I first interviewed at &lt;a href=&quot;https://kumparan.com/&quot;&gt;kumparan&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I had no idea whatsoever of what GraphQL is about, let alone how to test it. But after dealing with (&lt;em&gt;testing&lt;/em&gt;) GraphQL server for 1 year, I cannot look at traditional REST API the same way again. GraphQL really solves the over-fetching problem of REST.&lt;/p&gt;
