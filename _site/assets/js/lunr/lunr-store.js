@@ -10,4 +10,10 @@ var store = [{
         "tags": ["karate","automated test","performance test"],
         "url": "http://localhost:4000/karate/automated%20test/performance%20test/karate-perf-test/",
         "teaser": null
+      },{
+        "title": "Irritating Question: Are You An Automation Tester?",
+        "excerpt":"The Question “So you are on QA. Are you an automation tester or just a tester?” It always irritates me whenever people ask me (or another people) this kind of question. The thing that worries me is that this kind of mindset seems to start trending in the QA industry....","categories": ["software testing","automated test"],
+        "tags": ["software testing","automated test"],
+        "url": "http://localhost:4000/software%20testing/automated%20test/are-you-automation-tester/",
+        "teaser": null
       },]
