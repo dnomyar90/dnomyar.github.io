@@ -3,7 +3,7 @@ title: "Irritating Question: Are You An Automation Tester?"
 date: 2020-07-03
 modified: 2020-07-03
 categories: [software testing, automated test]
-excerpt: The question I dread the most. "Are you an automation test engineer or _just_ a tester?" Who are you to say testing a feature thoroughly is not as valuable as automating tests?
+excerpt: The question I dread the most. "Are you an automated test engineer or _just_ a tester?" Who are you to say testing a feature thoroughly is not as valuable as automating tests?
 tags: [software testing, automated test]
 classes: wide
 header:
