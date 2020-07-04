@@ -46,7 +46,7 @@ I feel so lucky that I was faced early with the harsh reality: **I  suck at test
 I personally prefer doing a hybrid of both testing features and handling automated test. It gives me the opportunity to observe and be the best of both worlds.
 
 ## The Trend
-All of these are from my personal experience. Of course here are a lot of different cases for every company and individual. However it irritates me the most when I was faced with situations where the so called _leaders_ in QA department think less of testers compared to automated test engineer.
+All of these are from my personal experience. Of course there are a lot of different cases for every company and individual. However it irritates me the most when I was faced with situations where the so called _leaders_ in QA department think less of testers compared to automated test engineer.
 
 There were instances where I saw some leaders lured testers to learn about automated test by convincing them that their salary will be better if they became automated test engineers. I think this is kind of the worst case scenario of a trend of over glorifying automated test engineer. I believe this kind of view from people who are considered to be _senior_ in QA then influence people in the industry to overglorify testers who can write automated test.
 
