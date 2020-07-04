@@ -68,4 +68,4 @@ There are a lot of more to it on testing than only test automation. For me autom
 
 If our testing practices are still bad, we need to address that problem first. Bringing test automation into the process will not magically solve our problem.
 
-**If your testing scenario sucks, what do you think the output of your automated tests will be?**
+**If your testing scenarios sucks, what do you think the output of your automated tests will be?**
