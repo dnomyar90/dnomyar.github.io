@@ -64,8 +64,8 @@ So what makes a QA that can write automated test any special? I believe the test
 Or if your testing team has separated testers who exclusively write test cases, don't you see now how important too is their work?  👀
 
 ## The Verdict
-There are a lot of more to it on testing than only test automation. For me automated test is an icing on the cake on top of good testing practices. If your testing practices suck, do not expect test automation to magically solve your problem. Trust me, it will not.
+There are a lot of more to it on testing than only test automation. There are a lot of testing techniques and variations to learn. Other than automated test, one will also need to consider say CI/CD practices. What good are automated tests if it is rarely used? Or when it is used, it never produces consistent result?
 
-If our testing practices are still bad, we need to address that problem first. Bringing test automation into the process will not magically solve our problem.
+For me automated test is an icing on the cake on top of good testing practices. If our testing practices suck, do not expect test automation to magically solve our problem. We need to fix our testing practices first. And one good way to start improving testing practices is to start honoring both testers and automated test engineers with the same level of respect. This way everyone understands the importance of both generating tests aand automated tests.
 
 **If your testing scenarios sucks, what do you think the output of your automated tests will be?**
