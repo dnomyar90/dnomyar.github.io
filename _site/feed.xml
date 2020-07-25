@@ -1,4 +1,242 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-05T12:54:28+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Irritating Question: Are You An Automation Tester?</title><link href="http://localhost:4000/software%20testing/automated%20test/are-you-automation-tester/" rel="alternate" type="text/html" title="Irritating Question: Are You An Automation Tester?" /><published>2020-07-03T00:00:00+07:00</published><updated>2020-07-03T00:00:00+07:00</updated><id>http://localhost:4000/software%20testing/automated%20test/are-you-automation-tester</id><content type="html" xml:base="http://localhost:4000/software%20testing/automated%20test/are-you-automation-tester/">&lt;h2 id=&quot;the-question&quot;&gt;The Question&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-25T15:53:16+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Reusing Fragments and Autogenerate GraphQL Queries Using Karate</title><link href="http://localhost:4000/karate/automated%20test/graphql/auto-generate-grapql-queries-karate/" rel="alternate" type="text/html" title="Reusing Fragments and Autogenerate GraphQL Queries Using Karate" /><published>2020-07-25T00:00:00+07:00</published><updated>2020-07-25T00:00:00+07:00</updated><id>http://localhost:4000/karate/automated%20test/graphql/auto-generate-grapql-queries-karate</id><content type="html" xml:base="http://localhost:4000/karate/automated%20test/graphql/auto-generate-grapql-queries-karate/">&lt;h2 id=&quot;karate-tests-prep&quot;&gt;Karate Tests Prep&lt;/h2&gt;
+&lt;p&gt;If you haven’t read through my article &lt;a href=&quot;https://dnomyar.dev/karate/automated%20test/karate-graphql&quot; target=&quot;_blank&quot;&gt;Powerful GraphQL Automated Test Using Karate&lt;/a&gt;, you should do that now. You will need to know how Karate test works firsthand before proceeding with this one. This post will walk you through the workaround to organise your GraphQL queries and fragments using karate.&lt;/p&gt;
+
+&lt;h2 id=&quot;problem-statement&quot;&gt;Problem Statement&lt;/h2&gt;
+&lt;p&gt;As I have mentioned on my other &lt;a href=&quot;https://dnomyar.dev/karate/automated%20test/karate-graphql&quot; target=&quot;_blank&quot;&gt;article&lt;/a&gt;, karate is really great for either REST or &lt;a href=&quot;https://graphql.org/&quot;&gt;GraphQL&lt;/a&gt; requests. To be speicific in my current company (&lt;a href=&quot;https://kumparan.com/&quot;&gt;kumparan.com&lt;/a&gt;), we are dealing with GraphQL. GraphQL test automation is provided out of the box with karate. Based on the example on karate’s github, you can either use plain text or even read from GraphQL files.&lt;/p&gt;
+
+&lt;p&gt;GraphQL request looks something like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;query FindAllPlayers {
+FindAllPlayers {
+...Player
+}
+}
+
+fragment Player on Player {
+id
+first_name
+last_name
+team{
+...Team
+}
+}
+
+fragment Team on Team {
+id
+name
+is_league_winner
+current_competitions
+league{
+...League
+}
+}
+
+fragment League on League {
+id
+name
+continent
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;AFAIK this is the standard way of doing things in tools like &lt;a href=&quot;https://www.postman.com/&quot;&gt;Postman&lt;/a&gt; or &lt;a href=&quot;https://insomnia.rest/&quot;&gt;Insomnia&lt;/a&gt;. We need to write each fragment again and again for each query. This generates two big concerns for me:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;If a fragment is changed, we need to find and replace each fragment on each query&lt;/li&gt;
+  &lt;li&gt;Writing queries to use in Postman or Insomnia will be a painful process&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;solution-for-problem-1&quot;&gt;Solution for problem #1&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;Problem #1&lt;/em&gt;&lt;/strong&gt;:
+“If a fragment is changed, we need to find and replace each fragment on each query”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We decided that we must design the usage of fragments and queries on our karate tests to be as modular as possible. We achieve our goal by separating fragments and queries. We declare them in their own specific javascript files. Karate really comes in handy as it can easily make javascript calls out of the box.&lt;/p&gt;
+
+&lt;p&gt;We ended up using this kind of setup:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-- feature files
+  -- FindAllPlayers.feature
+  -- FindPlayerByID.feature
+  -- AddNewPlayer.feature
+  -- ....
+-- queries
+  -- FindAllPlayers.js
+  -- FindPlayerByID.js
+  -- ....
+-- mutations
+  -- AddNewPlayer.js
+  -- ....
+   -- fragments
+      -- FragmentPlayer.js
+      -- FragmentLeague.js
+      -- FragmentTeam.js
+      -- ....
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Each &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.feature&lt;/code&gt; is going to call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;queries&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mutations&lt;/code&gt;. On each &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;query&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mutation&lt;/code&gt; they are going to specify the operation to use and the fragments they need. Hence, no need for us to hardcode each fragment to every query or mutation.&lt;/p&gt;
+
+&lt;p&gt;Below are the code implementation of the setup (which you can find in the &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt; too):&lt;/p&gt;
+&lt;h3 id=&quot;feature-file&quot;&gt;Feature file&lt;/h3&gt;
+&lt;p&gt;In feature file we call the javascript file for query or mutation. It is as simple as that.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@query
+Feature: Test GraphQL Find Players
+
+    Background:
+        Given url baseUrl
+
+    Scenario: Find All Players
+
+      Given def query = karate.call('classpath:queries/FindAllPlayers.js')
+      
+      And request { query: '#(query)'}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;query-file&quot;&gt;Query file&lt;/h3&gt;
+&lt;p&gt;Here we declare the query with all of it’s parameters. We call the fragments we need.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;helper.js&lt;/code&gt; is a string manipulation javascript file we use to &lt;em&gt;flatten&lt;/em&gt; the fragments. It works to avoid duplicated fragments to be declared (sometimes in complex requests we call a lot of fragments). Of course you can find it on the &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt; too.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function () {
+    var query =
+        'query FindAllPlayers {\
+            FindAllPlayers {\
+                    ...Player\
+                }\
+                }';
+
+    var fragments = [
+        karate.call('classpath:fragments/FragmentPlayer.js').Player()
+    ];
+    return karate.read('classpath:helper.js')(query, fragments);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;fragment-file&quot;&gt;Fragment file&lt;/h3&gt;
+&lt;p&gt;Here we declare the smallest unit of all tests. Each fragment is declared in a modular fashion that we will return them in form of array. Hence, making it possible for us to reuse fragments from another files.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//FragmentPlayer.js
+function() {
+    var Player =
+      'fragment Player on Player {\
+        id\
+        first_name\
+        last_name\
+        team{\
+          ...Team\
+        }\
+     }';
+  
+    return {
+      Player: function () { return [Player,
+        karate.call('classpath:fragments/FragmentTeam.js').Team()
+      ]
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//FragmentTeam.js
+function() {
+    var Team =
+      'fragment Team on Team {\
+        id\
+        name\
+        is_league_winner\
+        current_competitions\
+        league{\
+          ...League\
+        }\
+     }';
+  
+    return {
+      Team: function () { return [Team,
+        karate.call('classpath:fragments/FragmentLeague.js').League()
+      ]
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//FragmentLeague.js
+function() {
+    var League =
+      'fragment League on League {\
+        id\
+        name\
+        continent\
+     }';
+  
+    return {
+      League: function () { return [League]}
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;By achieving this setup, we managed to avoid the dangerous part of hard coding fragments to each GraphQL requests. So far it is quite useful for us too in terms of making writing tests a simpler task. When we are about to write new tests with existing fragments, we can just call the existing fragments instead of writing all required fragments from scratch.&lt;/p&gt;
+
+&lt;h2 id=&quot;solution-for-problem-2&quot;&gt;Solution for Problem #2&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;Problem #2&lt;/em&gt;&lt;/strong&gt;:
+“Writing queries to use in Postman or Insomnia will be a painful process”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;After using karate for GraphQL test automation for some time, we faced another problem (although it is unrelated with karate). We are testing GraphQL requests for new features or refactors using &lt;a href=&quot;https://insomnia.rest/&quot;&gt;Insomnia&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In Insomnia, like Postman, they have no &lt;em&gt;object-oriented-approach&lt;/em&gt; to reuse fragments. So we need to type in fragments all over again for all requests. This increasingly becomes annoying as it hampers productivity. Plus it becomes a risk since we might miss keying in some part of the fragments that may otherwise result in failure when called.&lt;/p&gt;
+
+&lt;p&gt;After reading that in karate we can override embedded execution hook, we managed to auto generate all existing requests on karate tests so that we won’t need to key in all fragments manually again. It is really fascinating that karate provides both simplicity and at the same time possibility for us to dig deeper and toy around to cater our specific needs.&lt;/p&gt;
+
+&lt;p&gt;So basically this is what we do with the test runner:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Intercept before requesting a query&lt;/li&gt;
+  &lt;li&gt;Get the query/mutation name&lt;/li&gt;
+  &lt;li&gt;Generate the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.graphql&lt;/code&gt; file for that query/mutation&lt;/li&gt;
+  &lt;li&gt;Write the query/mutation content into that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.graphql&lt;/code&gt; file&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Override
+    public boolean beforeStep(Step step, ScenarioContext context) {
+        if (step.getText().trim().contains(&quot;request {&quot;)) {
+            try {
+                File dir = new File(&quot;GQL-Queries&quot;);
+                dir.mkdirs();
+                String rawQuery = context.vars.get(&quot;query&quot;).getValue().toString();
+                String[] splittedQuery = rawQuery.split(&quot;\n&quot;, 2);
+                String firstLineQuery = splittedQuery[0];
+                String queryName = firstLineQuery.replace(&quot;query&quot;,&quot;&quot;).replace(&quot;mutation&quot;, &quot;&quot;).replaceAll(&quot;\\(.*?\\{&quot;, &quot;&quot;).replaceAll(&quot; &quot;,&quot;&quot;).replace(&quot;}&quot;,&quot;&quot;).replace(&quot;{&quot;,&quot;&quot;)+ &quot;.graphql&quot;;
+                File file = new File(dir, queryName);
+                FileWriter myWriter = new FileWriter(file);
+                myWriter.write(context.vars.get(&quot;query&quot;).getValue().toString());
+                myWriter.close();
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+        }
+        return true;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The above file is available on &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The hook above will generate &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.graphql&lt;/code&gt; files for each request, even if you call multiple requests in a single &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.feature&lt;/code&gt; file. It generates file in the folder &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GraphQL-Queries&lt;/code&gt; after each exeuction:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/karate-gql/GQLFiles.png&quot; alt=&quot;GQLFiles&quot; title=&quot;GQLFiles&quot; height=&quot;75%&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can then reuse those &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.graphql&lt;/code&gt; files on Postman, Insomnia, or any other tools you use:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/karate-gql/FindAllPlayers.png&quot; alt=&quot;FindAllPlayers&quot; title=&quot;FindAllPlayers&quot; height=&quot;75%&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/karate-gql/AddNewPlayer.png&quot; alt=&quot;AddNewPlayer&quot; title=&quot;AddNewPlayer&quot; height=&quot;75%&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With the approach above, it is more enjoyable now to test GraphQL requests since we don’t have to type requests manually. We just need to look into our &lt;a href=&quot;https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa/GQL-Queries&quot; target=&quot;_blank&quot;&gt;collection&lt;/a&gt; or run our tests locally. Our karate tests now not only works well for automated test, but also help to increase our productivity when testing features/refactors 😃&lt;/p&gt;
+
+&lt;p&gt;That’s it! Hope you find it useful.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Stay safe, stay healthy, and wear your masks!&lt;/em&gt; ✌️&lt;/p&gt;
+
+&lt;h1 id=&quot;repository&quot;&gt;&lt;a href=&quot;https://dnomyar.dev/karate/automated%20test/karate-graphql&quot; target=&quot;_blank&quot;&gt;Repository&lt;/a&gt;&lt;/h1&gt;</content><author><name>Raymond</name></author><category term="karate" /><category term="automated test" /><category term="graphql" /><summary type="html">Make your GraphQL testing more enjoyable. Autogenerate your GraphQL queries &amp; reuse fragments modularly straight from your automated tests!</summary></entry><entry><title type="html">Irritating Question: Are You An Automation Tester?</title><link href="http://localhost:4000/software%20testing/automated%20test/are-you-automation-tester/" rel="alternate" type="text/html" title="Irritating Question: Are You An Automation Tester?" /><published>2020-07-03T00:00:00+07:00</published><updated>2020-07-03T00:00:00+07:00</updated><id>http://localhost:4000/software%20testing/automated%20test/are-you-automation-tester</id><content type="html" xml:base="http://localhost:4000/software%20testing/automated%20test/are-you-automation-tester/">&lt;h2 id=&quot;the-question&quot;&gt;The Question&lt;/h2&gt;
 &lt;h3 id=&quot;so-you-are-on-qa-are-you-an-automation-tester-or-just-a-tester&quot;&gt;“So you are on QA. Are you an automation tester or &lt;em&gt;just&lt;/em&gt; a tester?”&lt;/h3&gt;
 
 &lt;p&gt;It always irritates me whenever people ask me (or another people) this kind of question. The thing that worries me is that this kind of mindset seems to start trending in the QA industry. I am talking about over glorifying the role of automated test engineer.&lt;/p&gt;

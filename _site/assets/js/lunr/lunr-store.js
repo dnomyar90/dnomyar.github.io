@@ -16,4 +16,10 @@ var store = [{
         "tags": ["software testing","automated test"],
         "url": "http://localhost:4000/software%20testing/automated%20test/are-you-automation-tester/",
         "teaser": null
+      },{
+        "title": "Reusing Fragments and Autogenerate GraphQL Queries Using Karate",
+        "excerpt":"Karate Tests Prep If you haven’t read through my article Powerful GraphQL Automated Test Using Karate, you should do that now. You will need to know how Karate test works firsthand before proceeding with this one. This post will walk you through the workaround to organise your GraphQL queries and...","categories": ["karate","automated test","graphql"],
+        "tags": ["karate","automated test","graphql"],
+        "url": "http://localhost:4000/karate/automated%20test/graphql/auto-generate-grapql-queries-karate/",
+        "teaser": null
       },]
