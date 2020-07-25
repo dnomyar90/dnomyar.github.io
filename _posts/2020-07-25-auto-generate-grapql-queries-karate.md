@@ -7,7 +7,7 @@ excerpt: Make your GraphQL testing more enjoyable. Autogenerate your GraphQL que
 tags: [karate, automated test, graphql]
 classes: wide
 header:
-  overlay_image: /assets/images/karate-gql/karate-gql.jpg
+  overlay_image: /assets/images/karate-gql/gql-karate.jpg
   overlay_filter: 0.7 # same as adding an opacity of 0.5 to a black background
   caption: "Photo by [svklimkin](https://unsplash.com/@svklimkin) on [Unsplash](https://unsplash.com)"
 
