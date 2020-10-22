@@ -58,7 +58,7 @@ Below is the code( You can find it along with the whole tests sample [here](http
     @Override
     public void afterFeature(FeatureResult result, ExecutionContext context) {
         File f = null;
-        f = context.rootFeatureContext.feature.getPath().toFile();
+        f = context.featureContext.feature.getPath().toFile();
         String filePath = f.toString();
         int line = 0;
         Path path = Paths.get(filePath);
