@@ -251,4 +251,4 @@ That's it! Hope you find it useful.
 
 _Stay safe, stay healthy, and wear your masks!_ ✌️
 
-# [Repository](https://dnomyar.dev/karate/automated%20test/karate-graphql){:target="_blank"}
+# [Repository](https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa){:target="_blank"}

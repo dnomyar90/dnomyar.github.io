@@ -22,4 +22,10 @@ var store = [{
         "tags": ["karate","automated test","graphql"],
         "url": "http://localhost:4000/karate/automated%20test/graphql/auto-generate-grapql-queries-karate/",
         "teaser": null
+      },{
+        "title": "Automatically Retrying Failed Karate Tests",
+        "excerpt":"Karate Tests Prep If you haven’t read through my article Powerful GraphQL Automated Test Using Karate, you should do that now. You will need to know how Karate test works firsthand before proceeding with this one. This post will walk you on how to automatically retry failed tests on karate....","categories": ["karate","automated test"],
+        "tags": ["karate","automated test"],
+        "url": "http://localhost:4000/karate/automated%20test/retry-failed-karate-tests/",
+        "teaser": null
       },]
