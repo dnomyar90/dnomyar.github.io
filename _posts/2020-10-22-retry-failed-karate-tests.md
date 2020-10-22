@@ -15,11 +15,11 @@ header:
 If you haven’t read through my article [Powerful GraphQL Automated Test Using Karate](https://dnomyar.dev/karate/automated%20test/karate-graphql){:target="_blank"}, you should do that now. You will need to know how Karate test works firsthand before proceeding with this one. This post will walk you on how to automatically retry failed tests on karate.
 
 ## Problem
-Karate is an awesome test automation library, there is no denying that. However it currently does not support auto-retrying test cases that failed in the first execution. I am talking about something like [this](https://medium.com/@sonaldwivedi/how-to-rerun-only-failed-testcases-using-testng-a23802f6884){:target="_blank"} via TestNG or [this](https://medium.com/@omurdenden/re-run-failed-automated-test-cases-in-robot-framework-jenkins-setup-5d293ea40947){:target="_blank"} via RobotFramework. The closest available mean of retry in karate comes in form of [`retry until`](https://github.com/intuit/karate/releases/tag/v0.9.0){:target="_blank"} of which you need to put manually on all of your test cases.
+Karate is an awesome test automation library, there is no denying that. However it currently does not support auto retrying test cases that failed in the first execution. I am talking about something like [this](https://medium.com/@sonaldwivedi/how-to-rerun-only-failed-testcases-using-testng-a23802f6884){:target="_blank"} via TestNG or [this](https://medium.com/@omurdenden/re-run-failed-automated-test-cases-in-robot-framework-jenkins-setup-5d293ea40947){:target="_blank"} via RobotFramework. The closest available mean of retry in karate comes in form of [`retry until`](https://github.com/intuit/karate/releases/tag/v0.9.0){:target="_blank"} of which you need to put manually on all of your test cases.
 
-Personally I understand the reason behind this, as tests should be deterministic. However, while that might work out well in an ideal world; we run our test cases on staging environment (which is far cry from production environment). Sometimes test execution fails because of random things such as network condition, some services occassionally chug, and many other things.
+Personally I understand the reason behind this, as tests should be deterministic. However, while that might work out well in an ideal world; we run our test cases on staging environment (which is far cry from production environment). Sometimes test fail because of random things such as network condition, some services occassionally chug, and many other things.
 
-Our automated tests become too flaky. Considering that we put our tests as a mandatory pipeline to introduce code to staging, it is totally unacceptable having to re-run tests all the time. It becomes even more frustrating when every times you re-run the tests, different causes of failure block the pipeline.
+Our automated tests become too flaky. Considering that we put our tests as a mandatory pipeline to introduce code to staging, it is totally unacceptable having to re-run tests all the time. It becomes more frustrating when every times you re-run the tests, different causes of failure block the pipeline.
 
 ![Meme]({{ site.url }}{{ site.baseurl }}/assets/images/karate-retry/bruh.jpeg "Bruh"){:height="75%" width="75%"}
 
@@ -51,7 +51,7 @@ Particularly we can override `afterScenario`. We can do these things:
 - Retry the tests with tag `@retry`
 - Delete the `@retry` tag from the tests if they are now passing
 
-Below is the code( You can found along with the whole tests sample [here](https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa){:target="_blank"})
+Below is the code( You can find it along with the whole tests sample [here](https://github.com/dnomyar90/football-karate-demo-graphql/tree/master/qa){:target="_blank"})
 
 ```
 
