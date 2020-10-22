@@ -3,7 +3,7 @@ title: Automatically Retrying Failed Karate Tests
 date: 2020-10-22
 modified: 2020-10-22
 categories: [karate, automated test]
-excerpt: Make test execution less flaky by retrying (only) failed tests.
+excerpt: Make test execution less flaky by retrying (only failed) tests.
 tags: [karate, automated test]
 classes: wide
 header:
