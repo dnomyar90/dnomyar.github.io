@@ -8,8 +8,8 @@
 .page__footer-follow .social-icons .svg-inline--fa { color: inherit; }
 
 /*!
- * Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
- * Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+ * Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+ * Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
  * Licensed under MIT (https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE)
 */
 /* Variables */
@@ -662,7 +662,7 @@ tr, td, th { vertical-align: middle; }
 .toc__menu li ul li ul li ul li ul li ul > li a { padding-left: 3.25rem; }
 
 /* ========================================================================== FOOTER ========================================================================== */
-.page__footer { clear: both; float: left; margin-left: 0; margin-right: 0; width: 100%; clear: both; margin-top: 3em; color: #000; -webkit-animation: intro 0.3s both; animation: intro 0.3s both; -webkit-animation-delay: 0.45s; animation-delay: 0.45s; background-color: #000; }
+.page__footer { clear: both; float: left; margin-left: 0; margin-right: 0; width: 100%; margin-top: 3em; color: #000; -webkit-animation: intro 0.3s both; animation: intro 0.3s both; -webkit-animation-delay: 0.45s; animation-delay: 0.45s; background-color: #000; }
 .page__footer::after { clear: both; content: ""; display: table; }
 .page__footer footer { clear: both; margin-left: auto; margin-right: auto; margin-top: 2em; max-width: 100%; padding: 0 1em 2em; }
 .page__footer footer::after { clear: both; content: ""; display: table; }
@@ -1003,6 +1003,8 @@ body { display: -webkit-box; display: -ms-flexbox; display: flex; min-height: 10
 
 .page__meta-title { margin-bottom: 10px; font-size: 0.75em; text-transform: uppercase; }
 
+.page__meta-sep::before { content: "\2022"; padding-left: 0.5em; padding-right: 0.5em; }
+
 /* Page taxonomy ========================================================================== */
 .page__taxonomy .sep { display: none; }
 .page__taxonomy strong { margin-right: 10px; }
@@ -1117,6 +1119,8 @@ body { display: -webkit-box; display: -ms-flexbox; display: flex; min-height: 10
   .grid__item:nth-child(4n + 3) { clear: none; margin-left: 1.6949152542%; }
   .grid__item:nth-child(4n + 4) { clear: none; margin-left: 1.6949152542%; } }
 .grid__item .page__meta, .grid__item .comment__date { margin: 0 0 4px; font-size: 0.6em; }
+.grid__item .page__meta-sep { display: block; }
+.grid__item .page__meta-sep::before { display: none; }
 .grid__item .archive__item-title { margin-top: 0.5em; font-size: 1em; }
 .grid__item .archive__item-excerpt { display: none; }
 @media (min-width: 48em) { .grid__item .archive__item-excerpt { display: block; font-size: 0.75em; } }
@@ -1210,7 +1214,7 @@ body { display: -webkit-box; display: -ms-flexbox; display: flex; min-height: 10
 .author__bio { margin: 0; }
 @media (min-width: 64em) { .author__bio { margin-top: 10px; margin-bottom: 20px; } }
 
-.author__urls-wrapper { position: relative; display: table-cell; vertical-align: middle; font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; z-index: 20; position: relative; cursor: pointer; }
+.author__urls-wrapper { position: relative; display: table-cell; vertical-align: middle; font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; z-index: 20; cursor: pointer; }
 .author__urls-wrapper li:last-child a { margin-bottom: 0; }
 .author__urls-wrapper .author__urls span.label { padding-left: 5px; }
 @media (min-width: 64em) { .author__urls-wrapper { display: block; } }
