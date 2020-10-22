@@ -46,7 +46,7 @@ I decided to do a research about karate hooks and remembered that you can actual
 
 Having previously played with these hooks in order to [automatically generates GraphQL queries](https://dnomyar.dev/karate/automated%20test/graphql/auto-generate-grapql-queries-karate/){:target="_blank"}, I found out that it is also possible for us to retry tests utilizing one of these hooks.
 
-Particularly we can override `afterScenario`. We can do these things:
+Particularly we can override `afterFeature`. We can do these things:
 - Add `@retry` tag to failed tests
 - Retry the tests with tag `@retry`
 - Delete the `@retry` tag from the tests if they are now passing
