@@ -142,7 +142,7 @@ It is truly amazing how such simple tweak can save you from a lot of headache. A
 
 For example if you have a test feature with 3 scenarios. Using this approach, even though there is only 1 failing scenario on that test feature, we still re-run all of the 3 cases. We are still exploring on how to tweak the approach to handle the re-run more efficiently 🤞
 
-That's all for this post. I hope you can utilise the same (if not better) approach in order to make your test executions more reliable. Please do comment if you have something to ask for discuss (You need to login via FB first though).
+That's all for this post. I hope you can utilise the same (if not better) approach in order to make your test executions more reliable. Please do comment if you have something to ask or discuss (You need to login via FB first though).
 
 _Stay safe, stay healthy, and always wear your masks outside!_
 
