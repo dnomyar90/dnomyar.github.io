@@ -56,7 +56,7 @@ Below is the code( You can find it along with the whole tests sample [here](http
 ```
 
     @Override
-    public void afterScenario(ScenarioResult result, ScenarioContext context) {
+    public void afterFeature(FeatureResult result, ExecutionContext context) {
         File f = null;
         f = context.rootFeatureContext.feature.getPath().toFile();
         String filePath = f.toString();
