@@ -124,16 +124,16 @@ It is just simply a string manipulation where we append `@retry` tag to failed t
 _*We are still running all the scenarios on the failing tests, hence on the next execution the number of scenarios we run is not 65 but 68_ ✌️
 
 
-![Pipe2]({{ site.url }}{{ site.baseurl }}/assets/images/karate-retry/pipe2.png "Pipe2"){:height="50%" width="50%"}
+![Pipe2]({{ site.url }}{{ site.baseurl }}/assets/images/karate-retry/pipe2.png "Pipe2"){:height="75%" width="75%"}
 
 **- Second run: Re-runing 68 failing scenarios. Now only 11 is still failing**
 
 
-![Pipe3]({{ site.url }}{{ site.baseurl }}/assets/images/karate-retry/pipe3.png "Pipe3"){:height="50%" width="50%"}
+![Pipe3]({{ site.url }}{{ site.baseurl }}/assets/images/karate-retry/pipe3.png "Pipe3"){:height="75%" width="75%"}
 
 **- Last run: 11 remaining test is now passing**
 
-![Pipe1]({{ site.url }}{{ site.baseurl }}/assets/images/karate-retry/iu.gif "Pipe1"){:height="50%" width="50%"}
+![Pipe1]({{ site.url }}{{ site.baseurl }}/assets/images/karate-retry/iu.gif "Pipe1"){:height="75%" width="75%"}
 
 **Yeay test execution becomes less flaky. Everybody now have time to play Mobile Legends instead of anxiously waiting for test results.**
 
