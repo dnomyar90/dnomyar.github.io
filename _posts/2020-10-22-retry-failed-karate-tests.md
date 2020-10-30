@@ -32,7 +32,7 @@ Oopsie, pretty sure it's a pain in the ass and we want to avoid that.
 
 ## Solution
 
-I decided to do a research about karate hooks and remembered that you can actually implement karate's `ExecutionHook` and override each of the hooks:
+I decided to do a research about karate hooks and remembered that you can actually implement karate's `ExecutionHook` and override each of these hooks:
 - `beforeScenario`
 - `afterScenario`
 - `beforeFeature`
