@@ -90,7 +90,7 @@ Below is the code( You can find it along with the whole tests sample [here](http
     }
 ```
 
-And on the test runner part you can simply just do this:
+And on the test runner part you can simply just do something like this:
 
 ```
 public class TestRunner {
