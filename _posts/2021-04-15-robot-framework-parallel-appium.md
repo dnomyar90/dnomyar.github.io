@@ -71,6 +71,53 @@ The structure of this sample project is as following:
                         Two params: Tag of test to run and number of devices to run into.
 ```
 
+I do not think I need to explain too much on the test-writing aspect, because it is fairly a very straightforward thing in Robot Framework. But below I provide an example of the tests:
+
+- Test Scenario:
+```
+Successful Addition Operation
+    Given User open calculator app
+    When User perform addition
+    Then User see correct result of addition
+```
+
+- Test Steps:
+```
+# Test Steps
+User perform addition
+    Tap number 8
+    Tap addition
+    Tap number 8
+    Tap equals
+```
+
+```
+User see correct result of addition
+    Assert result is "16"
+```
+
+- Page-based action:
+```
+${button.8}                                id=com.google.android.calculator:id/digit_8 
+${button.add}                              id=com.google.android.calculator:id/op_add
+${button.equal}                            id=com.google.android.calculator:id/eq
+${text.result}                             id=com.google.android.calculator:id/result
+```
+```
+Tap number 8
+    Wait Until Element Is Visible   ${button.8} 
+    Click Element                   ${button.8}
+```
+```
+Tap addition
+    Wait Until Element Is Visible   ${button.add} 
+    Click Element                   ${button.add}
+```
+```
+Assert result is "${expected_result}"
+    Wait Until Element Is Visible   ${text.result}
+    Element Text Should Be          ${text.result}      ${expected_result}  
+```
 
 The magic of the parallelization actually lies on using [pabot](https://pabot.org/){:target="_blank"} and resource file to distribute testing task to devices. We are going to run `Setup Test` before executing each test case. On `Setup Test` we get value set of devices we set. Below is the resource file sample:
 
