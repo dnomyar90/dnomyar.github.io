@@ -180,7 +180,7 @@ In this sample, you will need to manually:
 - Install APK to devices you want to run the tests with
 - Start Appium server on ports you are going to use
 
-Of course you can improvise and make the process automatic (We do it like that in our [company](https://kumparan.com/){:target="_blank"}. This sample project is intended to give the bare-minimum and easy to follow process of how to achieve parallel testing on Robot Framework with Appium.
+Of course you can improvise and make the process automatic (We do it like that in our [company](https://kumparan.com/)){:target="_blank"}. This sample project is intended to give the bare-minimum and easy to follow process of how to achieve parallel testing on Robot Framework with Appium.
 
 Please kindly follow the pre-requisite of installing neccessary libraries and how to run the tests on the [repository](https://github.com/dnomyar90/RF-Appium-Parallel-Sample){:target="_blank"}
 
