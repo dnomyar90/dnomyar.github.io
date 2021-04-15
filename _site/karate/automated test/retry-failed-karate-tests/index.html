@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
@@ -80,10 +80,13 @@
 
 
 
+
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Dnomyar Space Feed">
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Dnomyar Space Feed">
+
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,7 +113,6 @@
     }
   </style>
 <![endif]-->
-
 
 
     <!-- start custom head snippets -->
@@ -275,7 +277,7 @@
           
         
           
-            <li><a href="https://twitter.com/wongpuyuh" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://twitter.com/sumaru90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
       
@@ -375,7 +377,7 @@
 
 <h2 id="solution">Solution</h2>
 
-<p>I decided to do a research about karate hooks and remembered that you can actually implement karate’s <code class="language-plaintext highlighter-rouge">ExecutionHook</code> and override each of the hooks:</p>
+<p>I decided to do a research about karate hooks and remembered that you can actually implement karate’s <code class="language-plaintext highlighter-rouge">ExecutionHook</code> and override each of these hooks:</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">beforeScenario</code></li>
   <li><code class="language-plaintext highlighter-rouge">afterScenario</code></li>
@@ -391,7 +393,7 @@
 
 <p>Having previously played with these hooks in order to <a href="https://dnomyar.dev/karate/automated%20test/graphql/auto-generate-grapql-queries-karate/" target="_blank">automatically generates GraphQL queries</a>, I found out that it is also possible for us to retry tests utilizing one of these hooks.</p>
 
-<p>Particularly we can override <code class="language-plaintext highlighter-rouge">afterScenario</code>. We can do these things:</p>
+<p>Particularly we can override <code class="language-plaintext highlighter-rouge">afterFeature</code>. We can do these things:</p>
 <ul>
   <li>Add <code class="language-plaintext highlighter-rouge">@retry</code> tag to failed tests</li>
   <li>Retry the tests with tag <code class="language-plaintext highlighter-rouge">@retry</code></li>
@@ -402,9 +404,9 @@
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
     @Override
-    public void afterScenario(ScenarioResult result, ScenarioContext context) {
+    public void afterFeature(FeatureResult result, ExecutionContext context) {
         File f = null;
-        f = context.rootFeatureContext.feature.getPath().toFile();
+        f = context.featureContext.feature.getPath().toFile();
         String filePath = f.toString();
         int line = 0;
         Path path = Paths.get(filePath);
@@ -436,7 +438,7 @@
     }
 </code></pre></div></div>
 
-<p>And on the test runner part you can simply just do this:</p>
+<p>And on the test runner part you can simply just do something like this:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class TestRunner {
     @Test
@@ -485,7 +487,7 @@
 
 <p>For example if you have a test feature with 3 scenarios. Using this approach, even though there is only 1 failing scenario on that test feature, we still re-run all of the 3 cases. We are still exploring on how to tweak the approach to handle the re-run more efficiently 🤞</p>
 
-<p>That’s all for this post. I hope you can utilise the same (if not better) approach in order to make your test executions more reliable. Please do comment if you have something to ask for discuss (You need to login via FB first though).</p>
+<p>That’s all for this post. I hope you can utilise the same (if not better) approach in order to make your test executions more reliable. Please do comment if you have something to ask or discuss (You need to login via FB first though).</p>
 
 <p><em>Stay safe, stay healthy, and always wear your masks outside!</em></p>
 
@@ -501,19 +503,13 @@
 
 
   
-  
-  
 
   <p class="page__taxonomy">
     <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
     <span itemprop="keywords">
     
-      
-      
       <a href="/tags/#automated-test" class="page__taxonomy-item" rel="tag">automated test</a><span class="sep">, </span>
     
-      
-      
       <a href="/tags/#karate" class="page__taxonomy-item" rel="tag">karate</a>
     
     </span>
@@ -526,19 +522,13 @@
 
 
   
-  
-  
 
   <p class="page__taxonomy">
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
     
-      
-      
       <a href="/categories/#automated-test" class="page__taxonomy-item" rel="tag">automated test</a><span class="sep">, </span>
     
-      
-      
       <a href="/categories/#karate" class="page__taxonomy-item" rel="tag">karate</a>
     
     </span>
@@ -546,6 +536,7 @@
 
 
         
+
   <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-10-22T00:00:00+07:00">October 22, 2020</time></p>
 
 
@@ -571,7 +562,8 @@
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/appium/automated%20test/robot-framework-parallel-appium/" class="pagination--pager" title="Parallel Appium Test With Robot Framework (Pabot)
+">Next</a>
     
   </nav>
 
@@ -585,6 +577,46 @@
     <div class="page__related">
       <h4 class="page__related-title">You May Also Enjoy</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/appium/automated%20test/robot-framework-parallel-appium/" rel="permalink">Parallel Appium Test With Robot Framework (Pabot)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          11 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Make your Robot Framework Appium tests run faster through parallel execution!
+</p>
+  </article>
+</div>
+
         
           
 
@@ -705,46 +737,6 @@
 </div>
 
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/karate/automated%20test/karate-graphql/" rel="permalink">Powerful GraphQL Automated Test Using Karate
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          15 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Demo of karate test framework for GraphQL application. Sample GraphQL application is provided.
-</p>
-  </article>
-</div>
-
-        
       </div>
     </div>
   
@@ -788,16 +780,18 @@
         
       
         
-          <li><a href="https://twitter.com/wongpuyuh" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          <li><a href="https://twitter.com/sumaru90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
         
       
     
 
-    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 Raymond. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 Raymond. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

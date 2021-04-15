@@ -1,4 +1,152 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-10-22T20:52:05+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Automatically Retrying Failed Karate Tests</title><link href="http://localhost:4000/karate/automated%20test/retry-failed-karate-tests/" rel="alternate" type="text/html" title="Automatically Retrying Failed Karate Tests" /><published>2020-10-22T00:00:00+07:00</published><updated>2020-10-22T00:00:00+07:00</updated><id>http://localhost:4000/karate/automated%20test/retry-failed-karate-tests</id><content type="html" xml:base="http://localhost:4000/karate/automated%20test/retry-failed-karate-tests/">&lt;h2 id=&quot;karate-tests-prep&quot;&gt;Karate Tests Prep&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-15T21:39:45+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Parallel Appium Test With Robot Framework (Pabot)</title><link href="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/" rel="alternate" type="text/html" title="Parallel Appium Test With Robot Framework (Pabot)" /><published>2021-04-15T00:00:00+07:00</published><updated>2021-04-15T00:00:00+07:00</updated><id>http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium</id><content type="html" xml:base="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/">&lt;h2 id=&quot;robot-framework&quot;&gt;&lt;a href=&quot;https://robotframework.org/&quot; target=&quot;_blank&quot;&gt;Robot Framework&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Robot Framework is a generic open source automation framework. It can be used for test automation and robotic process automation (RPA). It has easy syntax, utilizing human-readable keywords. The framework has a rich ecosystem around it, consisting of libraries and tools that are developed as separate projects.&lt;/p&gt;
+
+&lt;p&gt;In my opinion it is a straightforward and powerful tool that enables us to do testing. You can do almost all kinds of testing imaginable with Robot Framework. Included in one of them is mobile app automated testing using Appium.&lt;/p&gt;
+
+&lt;p&gt;Any organization wanting to kick-start automated testing process quickly with low learning curve should in my opinion give the framework a try. It can even implement tests in a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Given-When-Then&lt;/code&gt; or Gherkin style (This sample project utilizes such approach).&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Test Scenario:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Test Cases
+Successful Division Operation
+  Given User open calculator app
+  When User perform division
+  Then User see correct result of division
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Test Steps:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User perform addition
+  Tap number 8
+  Tap addition
+  Tap number 8
+  Tap equals
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Page-based Action:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Tap number 8
+  Wait Until Element Is Visible   ${button.8} 
+  Click Element                   ${button.8}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;robot-framework-appium-test-structure&quot;&gt;Robot Framework Appium Test Structure&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Notes: The sample provided is to run tests on Android. To make it run on iPhone, you will need to tweak it here and there.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;repository&quot;&gt;&lt;a href=&quot;https://github.com/dnomyar90/RF-Appium-Parallel-Sample&quot; target=&quot;_blank&quot;&gt;Repository&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;The structure of this sample project is as following:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- asset
+    - calculator.apk:   Sample APK file to run tests.
+
+- src
+    - scenario:         Test cases on the upper-most level
+    - step:             Page-based actions summarizing test case in the scenario level
+    - page:             Individual page-based action
+                        E.g. clicking, inputting text, checking text, etc.
+
+- DevicesSet.dat:       Data devices to run the tests into (UDID, Appium Port, System Port)
+
+- TestSetup.robot:      Test Setup and Test Teardown to run before and after each test
+
+- run-test.sh:          Runner to simplify commands of running tests.
+                        Two params: Tag of test to run and number of devices to run into.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The magic of the parallelization actually lies on using &lt;a href=&quot;https://pabot.org/&quot; target=&quot;_blank&quot;&gt;pabot&lt;/a&gt; and resource file to distribute testing task to devices. We are going to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Setup Test&lt;/code&gt; before executing each test case. On &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Setup Test&lt;/code&gt; we get value set of devices we set. Below is the resource file sample:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Redmi Note 9]
+tags=redmi
+udid=4aba4aacac3f71ce
+appium_port=4723
+system_port=8202
+
+[Samsung S21 Ultra]
+tags=samsung
+udid=9RGNU20920100424
+appium_port=4724
+system_port=8201
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We then capture the data set by utilising pabot’s powerful &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pabotLib&lt;/code&gt; in order to ensure that only one of the processes uses the shared data set (Avoiding race condition). We then use the mutually exclusive acquired data to open application on the designated device.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Setup Test
+    ${valuesetname}=    Acquire Value Set
+    Log to console    ${valuesetname}
+    ${used_udid}=     Get Value From Set   udid
+    Set Global Variable    ${used_udid}
+    Log to console    ${used_udid}
+
+    ${used_appiumPort}=     Get Value From Set   appium_port
+    Set Global Variable    ${used_appiumPort}
+    Log to console    ${used_appiumPort}
+
+    ${used_system_port}=     Get Value From Set   system_port
+    Set Global Variable    ${used_system_port}
+    Log to console    ${used_system_port}
+
+    ${package}=    Set Variable        com.google.android.calculator
+    ${appium_server}    Set Variable    http://127.0.0.1:${used_appiumPort}/wd/hub
+
+    Open Application
+    ...   ${appium_server}
+    ...   platformName=Android
+    ...   appPackage=${package}
+    ...   appActivity=com.android.calculator2.Calculator
+    ...   noReset=false
+    ...   udid=${used_udid}
+    ...   systemPort=${used_system_port}
+    ...   automationName=uiautomator2
+    ...   newCommandTimeout=10000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After the test execution is completed, it will run the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Test Teardown&lt;/code&gt; defined on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TestSetup.robot&lt;/code&gt;. Basically it will release the resources it was using and then closes the application currently undergoing test. Then the result will be presented to you as either failed or passed.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Teardown Test
+    Release value set
+    Close Application
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this sample, you will need to manually:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Install APK to devices you want to run the tests with&lt;/li&gt;
+  &lt;li&gt;Start Appium server on ports you are going to use&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Of course you can improvise and make the process automatic (We do it like that in our &lt;a href=&quot;https://kumparan.com/&quot; target=&quot;_blank&quot;&gt;company&lt;/a&gt;. This sample project is intended to give the bare-minimum and easy to follow process of how to achieve parallel testing on Robot Framework with Appium.&lt;/p&gt;
+
+&lt;p&gt;Please kindly follow the pre-requisite of installing neccessary libraries and how to run the tests on the &lt;a href=&quot;https://github.com/dnomyar90/RF-Appium-Parallel-Sample&quot; target=&quot;_blank&quot;&gt;repository&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;demo&quot;&gt;Demo&lt;/h2&gt;
+&lt;p&gt;Demo of parallel execution: 3 test cases run parallelly on 2 devices.
+Test cases are done toward calculator APK sample:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Addition&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Division&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Multiply&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=u0nHLsjJnqc&quot;&gt;&lt;img src=&quot;https://j.gifs.com/jZ74m4.gif&quot; alt=&quot;Parallel RF Appium Tests&quot; /&gt;&lt;/a&gt;asset&lt;/p&gt;
+
+&lt;p&gt;Testing tasks are distributed between available devices and avoiding race condition.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This post is intended to show and encourage people who may feel reluctant to use Robot Framework for automated app testing. Some people I know express their concern about the lack of support and available documentation to run Appium tests paralelly on Robot Framework.&lt;/p&gt;
+
+&lt;p&gt;It is a valid concern for me though, since I did not find any material or sample projects that demonstrate the ability of Robot Framework to run Appium tests paralelly. I consider myself an expert in terms of googling things. So it is naturally shocking for me to see such lack of material on the internet.&lt;/p&gt;
+
+&lt;p&gt;Hopefully this post gives you an insight that it is possible to run Appium tests paralelly for tests written in Robot Framework.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;In our &lt;a href=&quot;https://kumparan.com/&quot; target=&quot;_blank&quot;&gt;company&lt;/a&gt; we even go one step further by not using hardcoded value set. We are using endpoints and storing device state dynamically on the database for the sake of our internal QA services.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s it for now. If you have any question or suggestion please kindly left a comment on the comment box below (&lt;em&gt;You’ll need to use your Facebook account 😄✌️&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Stay safe, stay healthy, and always wear your masks outside!&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;repository-1&quot;&gt;&lt;a href=&quot;https://github.com/dnomyar90/RF-Appium-Parallel-Sample&quot; target=&quot;_blank&quot;&gt;Repository&lt;/a&gt;&lt;/h1&gt;</content><author><name>Raymond</name></author><category term="appium" /><category term="automated test" /><category term="appium" /><category term="automated test" /><summary type="html">Make your Robot Framework Appium tests run faster through parallel execution!</summary></entry><entry><title type="html">Automatically Retrying Failed Karate Tests</title><link href="http://localhost:4000/karate/automated%20test/retry-failed-karate-tests/" rel="alternate" type="text/html" title="Automatically Retrying Failed Karate Tests" /><published>2020-10-22T00:00:00+07:00</published><updated>2020-10-22T00:00:00+07:00</updated><id>http://localhost:4000/karate/automated%20test/retry-failed-karate-tests</id><content type="html" xml:base="http://localhost:4000/karate/automated%20test/retry-failed-karate-tests/">&lt;h2 id=&quot;karate-tests-prep&quot;&gt;Karate Tests Prep&lt;/h2&gt;
 &lt;p&gt;If you haven’t read through my article &lt;a href=&quot;https://dnomyar.dev/karate/automated%20test/karate-graphql&quot; target=&quot;_blank&quot;&gt;Powerful GraphQL Automated Test Using Karate&lt;/a&gt;, you should do that now. You will need to know how Karate test works firsthand before proceeding with this one. This post will walk you on how to automatically retry failed tests on karate.&lt;/p&gt;
 
 &lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
@@ -18,7 +166,7 @@
 
 &lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
 
-&lt;p&gt;I decided to do a research about karate hooks and remembered that you can actually implement karate’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ExecutionHook&lt;/code&gt; and override each of the hooks:&lt;/p&gt;
+&lt;p&gt;I decided to do a research about karate hooks and remembered that you can actually implement karate’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ExecutionHook&lt;/code&gt; and override each of these hooks:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;beforeScenario&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;afterScenario&lt;/code&gt;&lt;/li&gt;
@@ -34,7 +182,7 @@
 
 &lt;p&gt;Having previously played with these hooks in order to &lt;a href=&quot;https://dnomyar.dev/karate/automated%20test/graphql/auto-generate-grapql-queries-karate/&quot; target=&quot;_blank&quot;&gt;automatically generates GraphQL queries&lt;/a&gt;, I found out that it is also possible for us to retry tests utilizing one of these hooks.&lt;/p&gt;
 
-&lt;p&gt;Particularly we can override &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;afterScenario&lt;/code&gt;. We can do these things:&lt;/p&gt;
+&lt;p&gt;Particularly we can override &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;afterFeature&lt;/code&gt;. We can do these things:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Add &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@retry&lt;/code&gt; tag to failed tests&lt;/li&gt;
   &lt;li&gt;Retry the tests with tag &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@retry&lt;/code&gt;&lt;/li&gt;
@@ -45,9 +193,9 @@
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
     @Override
-    public void afterScenario(ScenarioResult result, ScenarioContext context) {
+    public void afterFeature(FeatureResult result, ExecutionContext context) {
         File f = null;
-        f = context.rootFeatureContext.feature.getPath().toFile();
+        f = context.featureContext.feature.getPath().toFile();
         String filePath = f.toString();
         int line = 0;
         Path path = Paths.get(filePath);
@@ -79,7 +227,7 @@
     }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;And on the test runner part you can simply just do this:&lt;/p&gt;
+&lt;p&gt;And on the test runner part you can simply just do something like this:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class TestRunner {
     @Test
@@ -128,7 +276,7 @@
 
 &lt;p&gt;For example if you have a test feature with 3 scenarios. Using this approach, even though there is only 1 failing scenario on that test feature, we still re-run all of the 3 cases. We are still exploring on how to tweak the approach to handle the re-run more efficiently 🤞&lt;/p&gt;
 
-&lt;p&gt;That’s all for this post. I hope you can utilise the same (if not better) approach in order to make your test executions more reliable. Please do comment if you have something to ask for discuss (You need to login via FB first though).&lt;/p&gt;
+&lt;p&gt;That’s all for this post. I hope you can utilise the same (if not better) approach in order to make your test executions more reliable. Please do comment if you have something to ask or discuss (You need to login via FB first though).&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Stay safe, stay healthy, and always wear your masks outside!&lt;/em&gt;&lt;/p&gt;
 
