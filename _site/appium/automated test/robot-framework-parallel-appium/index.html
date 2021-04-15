@@ -211,7 +211,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          10 minute read
+          12 minute read
         
       </span>
     
@@ -417,6 +417,53 @@ Successful Division Operation
 - run-test.sh:          Runner to simplify commands of running tests.
                         Two params: Tag of test to run and number of devices to run into.
 </code></pre></div></div>
+
+<p>I do not think I need to explain too much on the test-writing aspect, because it is fairly a very straightforward thing in Robot Framework. But below I provide an example of the tests:</p>
+
+<ul>
+  <li>Test Scenario:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Successful Addition Operation
+  Given User open calculator app
+  When User perform addition
+  Then User see correct result of addition
+</code></pre></div>    </div>
+  </li>
+  <li>Test Steps:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Test Steps
+User perform addition
+  Tap number 8
+  Tap addition
+  Tap number 8
+  Tap equals
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User see correct result of addition
+    Assert result is "16"
+</code></pre></div></div>
+
+<ul>
+  <li>Page-based action:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${button.8}                                id=com.google.android.calculator:id/digit_8 
+${button.add}                              id=com.google.android.calculator:id/op_add
+${button.equal}                            id=com.google.android.calculator:id/eq
+${text.result}                             id=com.google.android.calculator:id/result
+</code></pre></div>    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tap number 8
+  Wait Until Element Is Visible   ${button.8} 
+  Click Element                   ${button.8}
+</code></pre></div>    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tap addition
+  Wait Until Element Is Visible   ${button.add} 
+  Click Element                   ${button.add}
+</code></pre></div>    </div>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Assert result is "${expected_result}"
+  Wait Until Element Is Visible   ${text.result}
+  Element Text Should Be          ${text.result}      ${expected_result}  
+</code></pre></div>    </div>
+  </li>
+</ul>
 
 <p>The magic of the parallelization actually lies on using <a href="https://pabot.org/" target="_blank">pabot</a> and resource file to distribute testing task to devices. We are going to run <code class="language-plaintext highlighter-rouge">Setup Test</code> before executing each test case. On <code class="language-plaintext highlighter-rouge">Setup Test</code> we get value set of devices we set. Below is the resource file sample:</p>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-15T21:39:45+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Parallel Appium Test With Robot Framework (Pabot)</title><link href="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/" rel="alternate" type="text/html" title="Parallel Appium Test With Robot Framework (Pabot)" /><published>2021-04-15T00:00:00+07:00</published><updated>2021-04-15T00:00:00+07:00</updated><id>http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium</id><content type="html" xml:base="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/">&lt;h2 id=&quot;robot-framework&quot;&gt;&lt;a href=&quot;https://robotframework.org/&quot; target=&quot;_blank&quot;&gt;Robot Framework&lt;/a&gt;&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-15T21:59:37+07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dnomyar Space</title><subtitle>All things about QA, programming, life, and traces of meme.</subtitle><author><name>Raymond</name></author><entry><title type="html">Parallel Appium Test With Robot Framework (Pabot)</title><link href="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/" rel="alternate" type="text/html" title="Parallel Appium Test With Robot Framework (Pabot)" /><published>2021-04-15T00:00:00+07:00</published><updated>2021-04-15T00:00:00+07:00</updated><id>http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium</id><content type="html" xml:base="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/">&lt;h2 id=&quot;robot-framework&quot;&gt;&lt;a href=&quot;https://robotframework.org/&quot; target=&quot;_blank&quot;&gt;Robot Framework&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;Robot Framework is a generic open source automation framework. It can be used for test automation and robotic process automation (RPA). It has easy syntax, utilizing human-readable keywords. The framework has a rich ecosystem around it, consisting of libraries and tools that are developed as separate projects.&lt;/p&gt;
 
@@ -55,6 +55,53 @@ Successful Division Operation
 - run-test.sh:          Runner to simplify commands of running tests.
                         Two params: Tag of test to run and number of devices to run into.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I do not think I need to explain too much on the test-writing aspect, because it is fairly a very straightforward thing in Robot Framework. But below I provide an example of the tests:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Test Scenario:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Successful Addition Operation
+  Given User open calculator app
+  When User perform addition
+  Then User see correct result of addition
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Test Steps:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Test Steps
+User perform addition
+  Tap number 8
+  Tap addition
+  Tap number 8
+  Tap equals
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;User see correct result of addition
+    Assert result is &quot;16&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page-based action:
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;${button.8}                                id=com.google.android.calculator:id/digit_8 
+${button.add}                              id=com.google.android.calculator:id/op_add
+${button.equal}                            id=com.google.android.calculator:id/eq
+${text.result}                             id=com.google.android.calculator:id/result
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Tap number 8
+  Wait Until Element Is Visible   ${button.8} 
+  Click Element                   ${button.8}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Tap addition
+  Wait Until Element Is Visible   ${button.add} 
+  Click Element                   ${button.add}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Assert result is &quot;${expected_result}&quot;
+  Wait Until Element Is Visible   ${text.result}
+  Element Text Should Be          ${text.result}      ${expected_result}  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;The magic of the parallelization actually lies on using &lt;a href=&quot;https://pabot.org/&quot; target=&quot;_blank&quot;&gt;pabot&lt;/a&gt; and resource file to distribute testing task to devices. We are going to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Setup Test&lt;/code&gt; before executing each test case. On &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Setup Test&lt;/code&gt; we get value set of devices we set. Below is the resource file sample:&lt;/p&gt;
 
