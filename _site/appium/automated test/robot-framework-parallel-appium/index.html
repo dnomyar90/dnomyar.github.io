@@ -1,0 +1,843 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Parallel Appium Test With Robot Framework (Pabot) - Dnomyar Space</title>
+<meta name="description" content="Make your Robot Framework Appium tests run faster through parallel execution!">
+
+
+  <meta name="author" content="Raymond">
+  
+  <meta property="article:author" content="Raymond">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Dnomyar Space">
+<meta property="og:title" content="Parallel Appium Test With Robot Framework (Pabot)">
+<meta property="og:url" content="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/">
+
+
+  <meta property="og:description" content="Make your Robot Framework Appium tests run faster through parallel execution!">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/robot-framework-parallel/header.jpg">
+
+
+
+  <meta name="twitter:site" content="@wongpuyuh">
+  <meta name="twitter:title" content="Parallel Appium Test With Robot Framework (Pabot)">
+  <meta name="twitter:description" content="Make your Robot Framework Appium tests run faster through parallel execution!">
+  <meta name="twitter:url" content="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/robot-framework-parallel/header.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2021-04-15T00:00:00+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/appium/automated%20test/robot-framework-parallel-appium/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Raymond",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Dnomyar Space Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Dnomyar Space
+          <span class="site-subtitle">Welcome to my space and time</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Articles</a>
+            </li><li class="masthead__menu-item">
+              <a href="/work/">About Me</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/robot-framework-parallel/header.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Parallel Appium Test With Robot Framework (Pabot)
+
+        
+      </h1>
+      
+        <p class="page__lead">Make your Robot Framework Appium tests run faster through parallel execution!
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Photo by <a href="https://unsplash.com/@picsaf">Azamat E</a> on <a href="https://unsplash.com">Unsplash</a>
+</span>
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio.jpg" alt="Raymond" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Raymond</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>I walk into a bar. I order a beer. Order 0 beers. Order 999999 beers. Order a lizard. Order -1 beers. Order a ueicbksjdhd. Of course I order a DROP TABLE beers too.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Jakarta</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://github.com/dnomyar90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://linkedin.com/in/raymondsumargo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/sumaru90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Parallel Appium Test With Robot Framework (Pabot)">
+    <meta itemprop="description" content="Make your Robot Framework Appium tests run faster through parallel execution!">
+    <meta itemprop="datePublished" content="2021-04-15T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="robot-framework"><a href="https://robotframework.org/" target="_blank">Robot Framework</a></h2>
+
+<p>Robot Framework is a generic open source automation framework. It can be used for test automation and robotic process automation (RPA). It has easy syntax, utilizing human-readable keywords. The framework has a rich ecosystem around it, consisting of libraries and tools that are developed as separate projects.</p>
+
+<p>In my opinion it is a straightforward and powerful tool that enables us to do testing. You can do almost all kinds of testing imaginable with Robot Framework. Included in one of them is mobile app automated testing using Appium.</p>
+
+<p>Any organization wanting to kick-start automated testing process quickly with low learning curve should in my opinion give the framework a try. It can even implement tests in a <code class="language-plaintext highlighter-rouge">Given-When-Then</code> or Gherkin style (This sample project utilizes such approach).</p>
+
+<p>Example:</p>
+
+<ul>
+  <li>Test Scenario:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Test Cases
+Successful Division Operation
+  Given User open calculator app
+  When User perform division
+  Then User see correct result of division
+</code></pre></div>    </div>
+  </li>
+  <li>Test Steps:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User perform addition
+  Tap number 8
+  Tap addition
+  Tap number 8
+  Tap equals
+</code></pre></div>    </div>
+  </li>
+  <li>Page-based Action:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tap number 8
+  Wait Until Element Is Visible   ${button.8} 
+  Click Element                   ${button.8}
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="robot-framework-appium-test-structure">Robot Framework Appium Test Structure</h2>
+<p><em>Notes: The sample provided is to run tests on Android. To make it run on iPhone, you will need to tweak it here and there.</em></p>
+
+<h1 id="repository"><a href="https://github.com/dnomyar90/RF-Appium-Parallel-Sample" target="_blank">Repository</a></h1>
+
+<p>The structure of this sample project is as following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- asset
+    - calculator.apk:   Sample APK file to run tests.
+
+- src
+    - scenario:         Test cases on the upper-most level
+    - step:             Page-based actions summarizing test case in the scenario level
+    - page:             Individual page-based action
+                        E.g. clicking, inputting text, checking text, etc.
+
+- DevicesSet.dat:       Data devices to run the tests into (UDID, Appium Port, System Port)
+
+- TestSetup.robot:      Test Setup and Test Teardown to run before and after each test
+
+- run-test.sh:          Runner to simplify commands of running tests.
+                        Two params: Tag of test to run and number of devices to run into.
+</code></pre></div></div>
+
+<p>The magic of the parallelization actually lies on using <a href="https://pabot.org/" target="_blank">pabot</a> and resource file to distribute testing task to devices. We are going to run <code class="language-plaintext highlighter-rouge">Setup Test</code> before executing each test case. On <code class="language-plaintext highlighter-rouge">Setup Test</code> we get value set of devices we set. Below is the resource file sample:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Redmi Note 9]
+tags=redmi
+udid=4aba4aacac3f71ce
+appium_port=4723
+system_port=8202
+
+[Samsung S21 Ultra]
+tags=samsung
+udid=9RGNU20920100424
+appium_port=4724
+system_port=8201
+</code></pre></div></div>
+
+<p>We then capture the data set by utilising pabot’s powerful <code class="language-plaintext highlighter-rouge">pabotLib</code> in order to ensure that only one of the processes uses the shared data set (Avoiding race condition). We then use the mutually exclusive acquired data to open application on the designated device.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Setup Test
+    ${valuesetname}=    Acquire Value Set
+    Log to console    ${valuesetname}
+    ${used_udid}=     Get Value From Set   udid
+    Set Global Variable    ${used_udid}
+    Log to console    ${used_udid}
+
+    ${used_appiumPort}=     Get Value From Set   appium_port
+    Set Global Variable    ${used_appiumPort}
+    Log to console    ${used_appiumPort}
+
+    ${used_system_port}=     Get Value From Set   system_port
+    Set Global Variable    ${used_system_port}
+    Log to console    ${used_system_port}
+
+    ${package}=    Set Variable        com.google.android.calculator
+    ${appium_server}    Set Variable    http://127.0.0.1:${used_appiumPort}/wd/hub
+
+    Open Application
+    ...   ${appium_server}
+    ...   platformName=Android
+    ...   appPackage=${package}
+    ...   appActivity=com.android.calculator2.Calculator
+    ...   noReset=false
+    ...   udid=${used_udid}
+    ...   systemPort=${used_system_port}
+    ...   automationName=uiautomator2
+    ...   newCommandTimeout=10000
+</code></pre></div></div>
+
+<p>After the test execution is completed, it will run the <code class="language-plaintext highlighter-rouge">Test Teardown</code> defined on <code class="language-plaintext highlighter-rouge">TestSetup.robot</code>. Basically it will release the resources it was using and then closes the application currently undergoing test. Then the result will be presented to you as either failed or passed.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Teardown Test
+    Release value set
+    Close Application
+</code></pre></div></div>
+
+<p>In this sample, you will need to manually:</p>
+<ul>
+  <li>Install APK to devices you want to run the tests with</li>
+  <li>Start Appium server on ports you are going to use</li>
+</ul>
+
+<p>Of course you can improvise and make the process automatic (We do it like that in our <a href="https://kumparan.com/" target="_blank">company</a>. This sample project is intended to give the bare-minimum and easy to follow process of how to achieve parallel testing on Robot Framework with Appium.</p>
+
+<p>Please kindly follow the pre-requisite of installing neccessary libraries and how to run the tests on the <a href="https://github.com/dnomyar90/RF-Appium-Parallel-Sample" target="_blank">repository</a></p>
+
+<h2 id="demo">Demo</h2>
+<p>Demo of parallel execution: 3 test cases run parallelly on 2 devices.
+Test cases are done toward calculator APK sample:</p>
+<ul>
+  <li><em>Addition</em></li>
+  <li><em>Division</em></li>
+  <li><em>Multiply</em></li>
+</ul>
+
+<p><a href="https://www.youtube.com/watch?v=u0nHLsjJnqc"><img src="https://j.gifs.com/jZ74m4.gif" alt="Parallel RF Appium Tests" /></a>asset</p>
+
+<p>Testing tasks are distributed between available devices and avoiding race condition.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>This post is intended to show and encourage people who may feel reluctant to use Robot Framework for automated app testing. Some people I know express their concern about the lack of support and available documentation to run Appium tests paralelly on Robot Framework.</p>
+
+<p>It is a valid concern for me though, since I did not find any material or sample projects that demonstrate the ability of Robot Framework to run Appium tests paralelly. I consider myself an expert in terms of googling things. So it is naturally shocking for me to see such lack of material on the internet.</p>
+
+<p>Hopefully this post gives you an insight that it is possible to run Appium tests paralelly for tests written in Robot Framework.</p>
+
+<p><em>In our <a href="https://kumparan.com/" target="_blank">company</a> we even go one step further by not using hardcoded value set. We are using endpoints and storing device state dynamically on the database for the sake of our internal QA services.</em></p>
+
+<p>That’s it for now. If you have any question or suggestion please kindly left a comment on the comment box below (<em>You’ll need to use your Facebook account 😄✌️</em>)</p>
+
+<p><em>Stay safe, stay healthy, and always wear your masks outside!</em></p>
+
+<h1 id="repository-1"><a href="https://github.com/dnomyar90/RF-Appium-Parallel-Sample" target="_blank">Repository</a></h1>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#appium" class="page__taxonomy-item" rel="tag">appium</a><span class="sep">, </span>
+    
+      <a href="/tags/#automated-test" class="page__taxonomy-item" rel="tag">automated test</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#appium" class="page__taxonomy-item" rel="tag">appium</a><span class="sep">, </span>
+    
+      <a href="/categories/#automated-test" class="page__taxonomy-item" rel="tag">automated test</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-15T00:00:00+07:00">April 15, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=wongpuyuh&text=Parallel+Appium+Test+With+Robot+Framework+%28Pabot%29%20http%3A%2F%2Flocalhost%3A4000%2Fappium%2Fautomated%2520test%2Frobot-framework-parallel-appium%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fappium%2Fautomated%2520test%2Frobot-framework-parallel-appium%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fappium%2Fautomated%2520test%2Frobot-framework-parallel-appium%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/karate/automated%20test/retry-failed-karate-tests/" class="pagination--pager" title="Automatically Retrying Failed Karate Tests
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/karate/automated%20test/retry-failed-karate-tests/" rel="permalink">Automatically Retrying Failed Karate Tests
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Make test execution less flaky by retrying (only failed) tests.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/karate/automated%20test/graphql/auto-generate-grapql-queries-karate/" rel="permalink">Reusing Fragments and Autogenerate GraphQL Queries Using Karate
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          14 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Make your GraphQL testing more enjoyable. Autogenerate your GraphQL queries &amp; reuse fragments modularly straight from your automated tests!
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/software%20testing/automated%20test/are-you-automation-tester/" rel="permalink">Irritating Question: Are You An Automation Tester?
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          12 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">The question I dread the most. “Are you an automated test engineer or just a tester?” Who are you to say testing a feature thoroughly is not as valuable as a...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/karate/automated%20test/performance%20test/karate-perf-test/" rel="permalink">Reusing Karate Tests as Performance Test
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Quickly set up your first performance test with karate. No need to write your performance test from scratch. Just reuse your existing tests!
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/dnomyar90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://linkedin.com/in/raymondsumargo" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://twitter.com/sumaru90" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 Raymond. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  
+
+
+
+
+
+  </body>
+</html>
